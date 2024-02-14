@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ./api:/usr/src/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    tty: true
+
+  app:
+    build:
+      context: ./app
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ./app:/usr/src/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    tty: true
+
+  db:
+    image: mariadb:10.11
+    volumes:
+      - ./db/data:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: "pass"
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: pass
+      PMA_VERBOSE: phpmyadmin
+      PMA_PORT: 3306
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
