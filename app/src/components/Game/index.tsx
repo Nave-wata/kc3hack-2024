@@ -3,6 +3,7 @@ import { is_set } from "../../utils/isType";
 import { create } from "domain";
 import Kinki from "../../assets/images/Kinki";
 
+
 export const GameComponent = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const screenOrientation = window.screen.orientation;
@@ -20,6 +21,15 @@ export const GameComponent = () => {
         color: '#000000', // テキストの色を指定
     };
 
+    const backgroundImageStyle: React.CSSProperties = {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: -1,
+    };
+
     // 画面を横向きに固定
     if (is_set(screenOrientation) && (screenOrientation as any).lock) {
         // @ts-ignore
@@ -31,9 +41,9 @@ export const GameComponent = () => {
 
     return (
         <div style={containerStyle}>
-            <div>
-                <div>{Kinki()}</div>
-            </div>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1600" height="1200">
+                {Kinki()}
+            </svg>
         </div>
     )
     //<canvas id="game" width="800" height="600"></canvas>
