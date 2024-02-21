@@ -1,4 +1,6 @@
 import React from "react";
+import normalmasu from "../../images/Masu/masu3.png"
+import eventlmasu from "../../images/Masu/eventmasu.png"
 
 function onHover<T>(e: React.MouseEvent<T>, ...hoverHandlers: Array<(e: React.MouseEvent<T>) => void>) {
   hoverHandlers.forEach((place) => place(e));
@@ -22,6 +24,9 @@ export default function Kinki() {
   const Mie = (e: React.MouseEvent<SVGPathElement>) => console.log("三重県");
 
   const Biwako = (e: React.MouseEvent<SVGPathElement>) => console.log("琵琶湖");
+
+  const masu_width = 32
+  const masu_height = 32
 
   return (
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1600" height="1200">
@@ -397,6 +402,59 @@ export default function Kinki() {
         fill="#F6FAF7"
         transform="translate(576,162)"
       />
+      {/*兵庫*/}
+      <image href={normalmasu} x="490" y="150" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="410" y="210" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="390" y="270" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="380" y="350" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="570" y="370" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="440" y="450" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="510" y="460" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="580" y="480" width={masu_width} height={masu_height} />
+      {/*兵庫*/}
+      {/*京都*/}
+      <image href={eventlmasu} x="590" y="130" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="640" y="200" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="720" y="230" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="780" y="290" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="850" y="370" width={masu_width} height={masu_height} />
+      {/*京都*/}
+      {/*滋賀*/}
+      <image href={normalmasu} x="1050" y="190" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="940" y="220" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="900" y="280" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="1040" y="290" width={masu_width} height={masu_height} />
+      {/*滋賀*/}
+      {/*三重*/}
+      <image href={normalmasu} x="1130" y="300" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="1200" y="340" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="1130" y="420" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="1100" y="570" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="1230" y="670" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="1110" y="680" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="1040" y="730" width={masu_width} height={masu_height} />
+      {/*三重*/}
+      {/*奈良*/}
+      <image href={eventlmasu} x="880" y="560" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="990" y="640" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="890" y="660" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="890" y="750" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="840" y="860" width={masu_width} height={masu_height} />
+      {/*奈良*/}
+      {/*大阪*/}
+      <image href={normalmasu} x="710" y="410" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="760" y="480" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="750" y="550" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="790" y="570" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="750" y="640" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="680" y="700" width={masu_width} height={masu_height} />
+      {/*大阪*/}
+      {/*和歌山*/}
+      <image href={normalmasu} x="690" y="850" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="920" y="1010" width={masu_width} height={masu_height} />
+      <image href={eventlmasu} x="740" y="1050" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="820" y="1060" width={masu_width} height={masu_height} />
+      {/*和歌山*/}
     </svg>
   );
 }
