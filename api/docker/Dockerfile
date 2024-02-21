@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 RUN \
     # パッケージインストール
     apt-get update -y -qq ; apt-get install -y -qq --no-install-recommends \
+      curl \
       sudo \
     ; \
     \
