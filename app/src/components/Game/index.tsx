@@ -11,7 +11,7 @@ export const GameComponent = () => {
     const containerStyle: React.CSSProperties = {
         margin: 0,
         padding: 0,
-        backgroundColor: '#00FFFF', // 任意の背景色を指定
+        backgroundColor: '#02C5FC', // 任意の背景色を指定
         fontFamily: 'sans-serif',
         backgroundSize: 'cover', // 画像をコンポーネント全体に広げる
         minHeight: '100vh', // 最小の画面の高さを指定

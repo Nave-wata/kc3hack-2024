@@ -402,6 +402,59 @@ export default function Kinki() {
         fill="#F6FAF7"
         transform="translate(576,162)"
       />
+
+      {/*ルート*/}
+      {/*大阪スタート*/}
+      <line x1="765" y1="560" x2="765" y2="655" stroke="yellow" stroke-width="3"/>
+      <line x1="765" y1="655" x2="695" y2="710" stroke="yellow" stroke-width="3"/>
+      <line x1="695" y1="710" x2="705" y2="810" stroke="yellow" stroke-width="3"/>
+      {/*和歌山ルート*/}
+      <line x1="705" y1="810" x2="675" y2="940" stroke="yellow" stroke-width="3"/>
+      <line x1="675" y1="940" x2="755" y2="1065" stroke="yellow" stroke-width="3"/>
+      <line x1="755" y1="1065" x2="835" y2="1075" stroke="yellow" stroke-width="3"/>
+      <line x1="835" y1="1075" x2="935" y2="1025" stroke="yellow" stroke-width="3"/>
+      <line x1="935" y1="1025" x2="855" y2="870" stroke="yellow" stroke-width="3"/>
+      {/*奈良ルート*/}
+      <line x1="855" y1="870" x2="905" y2="760" stroke="yellow" stroke-width="3"/>
+      <line x1="905" y1="760" x2="905" y2="670" stroke="yellow" stroke-width="3"/>
+      <line x1="905" y1="670" x2="895" y2="570" stroke="yellow" stroke-width="3"/>
+      <line x1="895" y1="570" x2="1005" y2="650" stroke="yellow" stroke-width="3"/>
+      <line x1="1005" y1="650" x2="1055" y2="740" stroke="yellow" stroke-width="3"/>
+      {/*三重ルート*/}
+      <line x1="1055" y1="740" x2="1125" y2="690" stroke="yellow" stroke-width="3"/>
+      <line x1="1125" y1="690" x2="1245" y2="685" stroke="yellow" stroke-width="3"/>
+      <line x1="1245" y1="685" x2="1115" y2="580" stroke="yellow" stroke-width="3"/>
+      <line x1="1115" y1="580" x2="1145" y2="430" stroke="yellow" stroke-width="3"/>
+      <line x1="1145" y1="430" x2="1215" y2="350" stroke="yellow" stroke-width="3"/>
+      <line x1="1215" y1="350" x2="1145" y2="310" stroke="yellow" stroke-width="3"/>
+      <line x1="1145" y1="310" x2="1015" y2="405" stroke="yellow" stroke-width="3"/>
+      {/*滋賀ルート*/}
+      <line x1="1015" y1="405" x2="1055" y2="300" stroke="yellow" stroke-width="3"/>
+      <line x1="1055" y1="300" x2="1065" y2="200" stroke="yellow" stroke-width="3"/>
+      <line x1="1065" y1="200" x2="1035" y2="160" stroke="yellow" stroke-width="3"/>
+      <line x1="1035" y1="160" x2="985" y2="180" stroke="yellow" stroke-width="3"/>
+      <line x1="985" y1="180" x2="955" y2="230" stroke="yellow" stroke-width="3"/>
+      <line x1="955" y1="230" x2="915" y2="290" stroke="yellow" stroke-width="3"/>
+      <line x1="915" y1="290" x2="865" y2="385" stroke="yellow" stroke-width="3"/>
+      {/*京都ルート*/}
+      <line x1="865" y1="385" x2="795" y2="300" stroke="yellow" stroke-width="3"/>
+      <line x1="795" y1="300" x2="735" y2="240" stroke="yellow" stroke-width="3"/>
+      <line x1="735" y1="240" x2="655" y2="215" stroke="yellow" stroke-width="3"/>
+      <line x1="655" y1="215" x2="605" y2="140" stroke="yellow" stroke-width="3"/>
+      <line x1="605" y1="140" x2="505" y2="160" stroke="yellow" stroke-width="3"/>
+      {/*兵庫ルート*/}
+      <line x1="505" y1="160" x2="425" y2="220" stroke="yellow" stroke-width="3"/>
+      <line x1="425" y1="220" x2="405" y2="280" stroke="yellow" stroke-width="3"/>
+      <line x1="405" y1="280" x2="395" y2="360" stroke="yellow" stroke-width="3"/>
+      <line x1="395" y1="360" x2="455" y2="465" stroke="yellow" stroke-width="3"/>
+      <line x1="455" y1="465" x2="525" y2="475" stroke="yellow" stroke-width="3"/>
+      <line x1="525" y1="475" x2="595" y2="495" stroke="yellow" stroke-width="3"/>
+      <line x1="595" y1="495" x2="585" y2="380" stroke="yellow" stroke-width="3"/>
+      <line x1="585" y1="380" x2="725" y2="420" stroke="yellow" stroke-width="3"/>
+      {/*大阪ゴール*/}
+      <line x1="725" y1="420" x2="775" y2="490" stroke="yellow" stroke-width="3"/>
+      <line x1="775" y1="490" x2="805" y2="580" stroke="yellow" stroke-width="3"/>
+      {/*ルート*/}
       {/*兵庫*/}
       <image href={normalmasu} x="490" y="150" width={masu_width} height={masu_height} />
       <image href={normalmasu} x="410" y="210" width={masu_width} height={masu_height} />
@@ -424,6 +477,7 @@ export default function Kinki() {
       <image href={eventlmasu} x="940" y="220" width={masu_width} height={masu_height} />
       <image href={normalmasu} x="900" y="280" width={masu_width} height={masu_height} />
       <image href={eventlmasu} x="1040" y="290" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="1000" y="390" width={masu_width} height={masu_height} />
       {/*滋賀*/}
       {/*三重*/}
       <image href={normalmasu} x="1130" y="300" width={masu_width} height={masu_height} />
@@ -450,7 +504,8 @@ export default function Kinki() {
       <image href={normalmasu} x="680" y="700" width={masu_width} height={masu_height} />
       {/*大阪*/}
       {/*和歌山*/}
-      <image href={normalmasu} x="690" y="850" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="690" y="800" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="660" y="930" width={masu_width} height={masu_height} />
       <image href={eventlmasu} x="920" y="1010" width={masu_width} height={masu_height} />
       <image href={eventlmasu} x="740" y="1050" width={masu_width} height={masu_height} />
       <image href={normalmasu} x="820" y="1060" width={masu_width} height={masu_height} />
