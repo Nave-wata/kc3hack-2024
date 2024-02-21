@@ -71,6 +71,7 @@ if __name__ == "__main__":
         [
             # マイグレーション対象のテーブルを配列で指定する
             Pelmanism,
+            Boke,
         ],
         sys.argv[1] if len(sys.argv) > 1 else None
     )
