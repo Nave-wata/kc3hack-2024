@@ -1,6 +1,6 @@
 import React from "react";
-import normalmasu from "../../images/Masu/masu3.png"
-import eventlmasu from "../../images/Masu/eventmasu.png"
+import normalmasu from "./Masu/masu3.png"
+import eventlmasu from "./Masu/eventmasu.png"
 
 function onHover<T>(e: React.MouseEvent<T>, ...hoverHandlers: Array<(e: React.MouseEvent<T>) => void>) {
   hoverHandlers.forEach((place) => place(e));
