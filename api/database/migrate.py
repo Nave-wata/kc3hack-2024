@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
-from .db import DB_URL, Base
+from . import DB_URL, Base
+from models import *
 import sys
 
 class Migrate:
@@ -69,6 +70,7 @@ if __name__ == "__main__":
     Migrate().handle(
         [
             # マイグレーション対象のテーブルを配列で指定する
+            Pelmanism,
         ],
         sys.argv[1] if len(sys.argv) > 1 else None
     )

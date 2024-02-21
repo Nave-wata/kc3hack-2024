@@ -1,8 +1,8 @@
 from fastapi import FastAPI
+from routers import router
 
+# アプリケーションインスタンスを生成
 app = FastAPI()
 
-
-@app.get("/hello")
-async def hello():
-    return {"message": "hello world!"}
+# ルーティングの読み込み
+app.include_router(router)
