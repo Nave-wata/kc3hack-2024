@@ -2,6 +2,7 @@ import React from "react";
 import { is_set } from "../../utils/isType";
 import { create } from "domain";
 import Kinki from "../../assets/images/Kinki";
+import { Box, Button, Grid } from "@mui/material";
 
 
 export const GameComponent = () => {
@@ -11,14 +12,15 @@ export const GameComponent = () => {
     const containerStyle: React.CSSProperties = {
         margin: 0,
         padding: 0,
-        backgroundColor: '#02C5FC', // 任意の背景色を指定
+        backgroundColor: '#02C5FC',
         fontFamily: 'sans-serif',
-        backgroundSize: 'cover', // 画像をコンポーネント全体に広げる
-        minHeight: '100vh', // 最小の画面の高さを指定
+        minHeight: '100vh',
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: '#000000', // テキストの色を指定
+        flexDirection: 'column', // ボタンとSVGを縦方向に配置するためにflex-directionを指定
+        alignItems: 'center', // 横方向に中央揃え
+        justifyContent: 'center', // 縦方向に中央揃え
+        color: '#000000',
+        position: 'relative', // 相対位置を設定
     };
 
     const backgroundImageStyle: React.CSSProperties = {
@@ -39,12 +41,21 @@ export const GameComponent = () => {
             });
     }
 
+    const dice_roll = () => {
+
+    }
+
     return (
-        <div style={containerStyle}>
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1600" height="1200">
-                {Kinki()}
-            </svg>
-        </div>
+        <Box style={containerStyle}>
+            <Button variant="contained" color="inherit" sx={{ fontSize: "25px", position: "relative", width: '200px', height: '100px', top: '1300px', right: '500px' }} onClick={() => dice_roll()}>サイコロを振る</Button>
+            <Grid>
+                <Grid >
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1600" height="1200">
+                        {Kinki()}
+                    </svg>
+                </Grid>
+            </Grid>
+        </Box>
     )
     //<canvas id="game" width="800" height="600"></canvas>
 
