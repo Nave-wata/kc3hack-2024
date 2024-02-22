@@ -6,5 +6,5 @@ class Pelmanism(Base):
     __tablename__ = "pelmanism"
 
     id = Column(BigInteger, primary_key=True, index=True)
-    kansai = Column(String(255), comment="関西弁")
-    default = Column(String(255), comment="標準語")
+    kansai = Column(String(255), nullable=False, comment="関西弁")
+    default = Column(String(255), nullable=False, comment="標準語")

@@ -1,16 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import {useState} from "react";
 import { is_set } from "../../utils/isType";
 import { create } from "domain";
 import Kinki from "../../assets/images/Kinki";
+import charactor1 from "../../assets/images/Charactor/charactor1.png";
+import charactor2 from "../../assets/images/Charactor/charactor2.png";
+import charactor3 from "../../assets/images/Charactor/charactor3.png";
+import charactor4 from "../../assets/images/Charactor/charactor4.png";
+import {Coordinate} from "./Coordinate";
 import { Box, Button, Grid } from "@mui/material";
-import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6 } from "../../assets/images/Dice/index";
+import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6, default_dice } from "../../assets/images/Dice/index";
 
+interface CoordinateType {
+    x: number;
+    y: number;
+}
+
+let i1 = 0;
+let i2 = 0;
+let i3 = 0;
+let i4 = 0;
 
 export const GameComponent = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const screenOrientation = window.screen.orientation;
-    const [dicePath, setDicePath] = useState(""); // dicePathとその更新関数をuseStateフックで定義
+    const [dicePath, setDicePath] = useState(default_dice); // dicePathとその更新関数をuseStateフックで定義
     const [prevRandomIndex, setPrevRandomIndex] = useState(-1); // 前回のランダムインデックスを保持するステート
+    const [isBoxVisible, setIsBoxVisible] = useState(false); // ボックスの表示状態を保持するステート
 
     const containerStyle: React.CSSProperties = {
         margin: 0,
@@ -44,7 +60,54 @@ export const GameComponent = () => {
             });
     }
 
+    const [charactor1X, setCharactor1X] = useState<number | undefined>(745);
+    const [charactor1Y, setCharactor1Y] = useState<number | undefined>(540);
+    const [charactor2X, setCharactor2X] = useState<number | undefined>(765);
+    const [charactor2Y, setCharactor2Y] = useState<number | undefined>(540);
+    const [charactor3X, setCharactor3X] = useState<number | undefined>(745);
+    const [charactor3Y, setCharactor3Y] = useState<number | undefined>(560);
+    const [charactor4X, setCharactor4X] = useState<number | undefined>(765);
+    const [charactor4Y, setCharactor4Y] = useState<number | undefined>(560);
+    const coordinates: CoordinateType[] = Coordinate();
 
+    const handleClick1 = () => {
+        i1 = (i1 + prevRandomIndex + 1) % coordinates.length;
+        setCharactor1X(coordinates[i1].x-20);
+        setCharactor1Y(coordinates[i1].y-20);
+    }
+
+    const handleClick2 = () => {
+        i2 = (i2 + prevRandomIndex + 1) % coordinates.length;
+        setCharactor2X(coordinates[i2].x);
+        setCharactor2Y(coordinates[i2].y-20);
+    }
+
+    const handleClick3 = () => {
+        i3 = (i3 + prevRandomIndex + 1) % coordinates.length;
+        setCharactor3X(coordinates[i3].x-20);
+        setCharactor3Y(coordinates[i3].y);
+    }
+
+    const handleClick4 = () => {
+        i4 = (i4 + prevRandomIndex + 1) % coordinates.length;
+        setCharactor4X(coordinates[i4].x);
+        setCharactor4Y(coordinates[i4].y);
+    }
+
+    const handleClick = () => {
+        i1 = (i1 + 1) % coordinates.length;
+        i2 = (i2 + 1) % coordinates.length;
+        i3 = (i3 + 1) % coordinates.length;
+        i4 = (i4 + 1) % coordinates.length;
+        setCharactor1X(coordinates[i1].x-20);
+        setCharactor1Y(coordinates[i1].y-20); 
+        setCharactor2X(coordinates[i2].x);
+        setCharactor2Y(coordinates[i2].y-20);
+        setCharactor3X(coordinates[i3].x-20);
+        setCharactor3Y(coordinates[i3].y);
+        setCharactor4X(coordinates[i4].x);
+        setCharactor4Y(coordinates[i4].y);
+    }
 
     const dice_roll = () => {
         // サイコロを振った結果に応じて、適切なダイス画像のパスを設定
@@ -60,7 +123,15 @@ export const GameComponent = () => {
         setPrevRandomIndex(randomIndex);
 
         setDicePath(diceImages[randomIndex]);
+        setIsBoxVisible(false);
+        setTimeout(() => {
+            setIsBoxVisible(true);
+        }, 800);
     };
+
+    useEffect(() => {
+        setIsBoxVisible(true);
+    }, []);
 
     return (
         <Box style={containerStyle}>
@@ -68,8 +139,17 @@ export const GameComponent = () => {
                 <Grid item>
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1350" height="1200">
                         {Kinki()}
+                        <image href={charactor1} x={charactor1X} y={charactor1Y} width="30" height="30" />
+                        <image href={charactor2} x={charactor2X} y={charactor2Y} width="30" height="30" />
+                        <image href={charactor3} x={charactor3X} y={charactor3Y} width="30" height="30" />
+                        <image href={charactor4} x={charactor4X} y={charactor4Y} width="30" height="30" />
                     </svg>
                 </Grid>
+                <button onClick={handleClick1}>1</button>
+                <button onClick={handleClick2}>2</button>
+                <button onClick={handleClick3}>3</button>
+                <button onClick={handleClick4}>4</button>
+                <button onClick={handleClick}>全</button>
                 <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                     <Box>
                         {dicePath && <img src={dicePath} alt="dice" />}
@@ -84,10 +164,10 @@ export const GameComponent = () => {
                             サイコロを振る
                         </Button>
                     </Box>
+                    <br />
+                    {isBoxVisible && (<Box sx={{ fontSize: "64px" }}>{prevRandomIndex + 1}</Box>)}
                 </Grid>
             </Grid>
         </Box>
     )
-    //<canvas id="game" width="800" height="600"></canvas>
-
 }
