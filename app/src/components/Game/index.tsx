@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {useState} from "react";
+import { useState } from "react";
 import { is_set } from "../../utils/isType";
 import { create } from "domain";
 import Kinki from "../../assets/images/Kinki";
@@ -7,7 +7,7 @@ import charactor1 from "../../assets/images/Charactor/charactor1.png";
 import charactor2 from "../../assets/images/Charactor/charactor2.png";
 import charactor3 from "../../assets/images/Charactor/charactor3.png";
 import charactor4 from "../../assets/images/Charactor/charactor4.png";
-import {Coordinate} from "./Coordinate";
+import { Coordinate } from "./Coordinate";
 import { Box, Button, Grid } from "@mui/material";
 import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6, default_dice } from "../../assets/images/Dice/index";
 
@@ -29,6 +29,7 @@ export const GameComponent = () => {
     const [dicePath, setDicePath] = useState(default_dice); // dicePathとその更新関数をuseStateフックで定義
     const [prevRandomIndex, setPrevRandomIndex] = useState(-1); // 前回のランダムインデックスを保持するステート
     const [isBoxVisible, setIsBoxVisible] = useState(false); // ボックスの表示状態を保持するステート
+    const [isdiceroll, setdiceroll] = useState(false);
 
     const containerStyle: React.CSSProperties = {
         margin: 0,
@@ -72,56 +73,36 @@ export const GameComponent = () => {
     const [charactor4Y, setCharactor4Y] = useState<number | undefined>(560);
     const coordinates: CoordinateType[] = Coordinate();
 
-    const handleClick1 = () => {
-        if(turn === 1){
-            i1 = (i1 + prevRandomIndex + 1) % coordinates.length;
-            setCharactor1X(coordinates[i1].x-20);
-            setCharactor1Y(coordinates[i1].y-20);
-            turn++;
-        }
-    }
-
-    const handleClick2 = () => {
-        if(turn === 2){
-            i2 = (i2 + prevRandomIndex + 1) % coordinates.length;
-            setCharactor2X(coordinates[i2].x);
-            setCharactor2Y(coordinates[i2].y-20);
-            turn++;
-        }
-    }
-
-    const handleClick3 = () => {
-        if(turn === 3){
-            i3 = (i3 + prevRandomIndex + 1) % coordinates.length;
-            setCharactor3X(coordinates[i3].x-20);
-            setCharactor3Y(coordinates[i3].y);
-            turn++;
-        }
-    }
-
-    const handleClick4 = () => {
-        if(turn === 4){
-            i4 = (i4 + prevRandomIndex + 1) % coordinates.length;
-            setCharactor4X(coordinates[i4].x);
-            setCharactor4Y(coordinates[i4].y);
-            turn = 1;
-        }
-    }
-
     const handleClick = () => {
-        i1 = (i1 + 1) % coordinates.length;
-        i2 = (i2 + 1) % coordinates.length;
-        i3 = (i3 + 1) % coordinates.length;
-        i4 = (i4 + 1) % coordinates.length;
-        setCharactor1X(coordinates[i1].x-20);
-        setCharactor1Y(coordinates[i1].y-20); 
-        setCharactor2X(coordinates[i2].x);
-        setCharactor2Y(coordinates[i2].y-20);
-        setCharactor3X(coordinates[i3].x-20);
-        setCharactor3Y(coordinates[i3].y);
-        setCharactor4X(coordinates[i4].x);
-        setCharactor4Y(coordinates[i4].y);
+        if (isdiceroll) {
+            if (turn === 1) {
+                i1 = (i1 + prevRandomIndex + 1) % coordinates.length;
+                setCharactor1X(coordinates[i1].x - 20);
+                setCharactor1Y(coordinates[i1].y - 20);
+                turn++;
+            } else if (turn === 2) {
+                i2 = (i2 + prevRandomIndex + 1) % coordinates.length;
+                setCharactor2X(coordinates[i2].x);
+                setCharactor2Y(coordinates[i2].y - 20);
+                turn++;
+            } else if (turn === 3) {
+                i3 = (i3 + prevRandomIndex + 1) % coordinates.length;
+                setCharactor3X(coordinates[i3].x - 20);
+                setCharactor3Y(coordinates[i3].y);
+                turn++;
+            } else if (turn === 4) {
+                i4 = (i4 + prevRandomIndex + 1) % coordinates.length;
+                setCharactor4X(coordinates[i4].x);
+                setCharactor4Y(coordinates[i4].y);
+                turn = 1;
+            }
+        }
+        setdiceroll(false)
+
     }
+
+
+
 
     const dice_roll = () => {
         // サイコロを振った結果に応じて、適切なダイス画像のパスを設定
@@ -132,6 +113,8 @@ export const GameComponent = () => {
         while (randomIndex === prevRandomIndex) {
             randomIndex = Math.floor(Math.random() * diceImages.length);
         }
+
+        setdiceroll(true)
 
         // 値を更新する前に現在の値を保存する
         setPrevRandomIndex(randomIndex);
@@ -160,11 +143,7 @@ export const GameComponent = () => {
                     </svg>
                 </Grid>
                 <div>{turn}</div>
-                <button onClick={handleClick1}>1</button>
-                <button onClick={handleClick2}>2</button>
-                <button onClick={handleClick3}>3</button>
-                <button onClick={handleClick4}>4</button>
-                <button onClick={handleClick}>全</button>
+                <button onClick={handleClick}>1</button>
                 <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                     <Box>
                         {dicePath && <img src={dicePath} alt="dice" />}
