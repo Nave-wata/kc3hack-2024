@@ -29,8 +29,9 @@ export const GameComponent = () => {
     const [dicePath, setDicePath] = useState(default_dice); // dicePathとその更新関数をuseStateフックで定義
     const [prevRandomIndex, setPrevRandomIndex] = useState(-1); // 前回のランダムインデックスを保持するステート
     const [isBoxVisible, setIsBoxVisible] = useState(false); // ボックスの表示状態を保持するステート
-    const [isdiceroll, setdiceroll] = useState(false);
-    const [anounceDiceroll, setAnounce] = useState("");
+    const [isdiceroll, setdiceroll] = useState(false);// サイコロがふられたかを保持するステート
+    const [anounceDiceroll, setAnounce] = useState("");// 「サイコロをふってください」のテキストを格納するステート
+    const [diceMaximum, setdiceMaximum] = useState(0);
 
     const containerStyle: React.CSSProperties = {
         margin: 0,
@@ -94,9 +95,53 @@ export const GameComponent = () => {
         setdiceroll(false)
 
     }
+    const move_1step = () => {
+
+        setAnounce("")
+
+
+        if (isdiceroll) {
+            if (turn === 1) {
+                if (i1 < diceMaximum) {
+                    i1 = (i1 + 1) % coordinates.length;
+                    setCharactor1X(coordinates[i1].x - 20);
+                    setCharactor1Y(coordinates[i1].y - 20);
+                } else {
+                    setAnounce("それ以上進めません")
+                }
+            } else if (turn === 2) {
+                if (i2 < diceMaximum) {
+                    i2 = (i2 + 1) % coordinates.length;
+                    setCharactor2X(coordinates[i2].x);
+                    setCharactor2Y(coordinates[i2].y - 20);
+                } else {
+                    setAnounce("それ以上進めません")
+                }
+            } else if (turn === 3) {
+                if (i3 < diceMaximum) {
+                    i3 = (i3 + 1) % coordinates.length;
+                    setCharactor3X(coordinates[i3].x - 20);
+                    setCharactor3Y(coordinates[i3].y);
+                } else {
+                    setAnounce("それ以上進めません")
+                }
+            } else if (turn === 4) {
+                if (i4 < diceMaximum) {
+                    i4 = (i4 + 1) % coordinates.length;
+                    setCharactor4X(coordinates[i4].x);
+                    setCharactor4Y(coordinates[i4].y);
+                } else {
+                    setAnounce("それ以上進めません")
+                }
+            }
+        } else {
+            setAnounce("サイコロをふってください")
+        }
+    }
 
     const stopMasu = () => {
         if (isdiceroll) {
+            setAnounce("")
             if (turn == 4) {
                 turn = 1
             } else {
@@ -124,6 +169,21 @@ export const GameComponent = () => {
 
             setdiceroll(true)
             setAnounce("")
+            //出目の最大を設定↓↓
+            if (turn == 1) {
+                setdiceMaximum(i1 + randomIndex + 1)
+            }
+            if (turn == 2) {
+                setdiceMaximum(i2 + randomIndex + 1)
+            }
+            if (turn == 3) {
+                setdiceMaximum(i3 + randomIndex + 1)
+            }
+            if (turn == 4) {
+                setdiceMaximum(i4 + randomIndex + 1)
+            }
+            //ここまで
+
 
             // 値を更新する前に現在の値を保存する
             setPrevRandomIndex(randomIndex);
@@ -134,7 +194,7 @@ export const GameComponent = () => {
                 setIsBoxVisible(true);
             }, 800);
         } else {
-            setAnounce("サイコロをふってください")
+            setAnounce("止まるマスを決定して下さい")
         }
     };
 
@@ -178,7 +238,7 @@ export const GameComponent = () => {
 
                     <Grid container justifyContent="center" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <Button variant="contained" color="inherit" sx={{ fontSize: "18px", position: "relative", width: '100px', height: '50px', }}>1つ戻る</Button>
-                        <Button variant="contained" color="inherit" sx={{ fontSize: "18px", position: "relative", width: '100px', height: '50px', }}>1つ進む</Button>
+                        <Button variant="contained" color="inherit" onClick={move_1step} sx={{ fontSize: "18px", position: "relative", width: '100px', height: '50px', }}>1つ進む</Button>
                     </Grid>
                     <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "18px", position: "relative", width: '200px', height: '50px', }}>このマスに止まる</Button>
                     <Box sx={{ fontSize: "32px", color: "red" }}>{anounceDiceroll}</Box>
