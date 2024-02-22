@@ -30,6 +30,7 @@ export const GameComponent = () => {
     const [prevRandomIndex, setPrevRandomIndex] = useState(-1); // 前回のランダムインデックスを保持するステート
     const [isBoxVisible, setIsBoxVisible] = useState(false); // ボックスの表示状態を保持するステート
     const [isdiceroll, setdiceroll] = useState(false);
+    const [anounceDiceroll, setAnounce] = useState("");
 
     const containerStyle: React.CSSProperties = {
         margin: 0,
@@ -94,6 +95,19 @@ export const GameComponent = () => {
 
     }
 
+    const stopMasu = () => {
+        if (isdiceroll) {
+            if (turn == 4) {
+                turn = 1
+            } else {
+                turn++
+            }
+            setdiceroll(false)
+        } else {
+            setAnounce("サイコロをふってください")
+        }
+    }
+
 
 
 
@@ -102,21 +116,26 @@ export const GameComponent = () => {
         const diceImages = [dice_1, dice_2, dice_3, dice_4, dice_5, dice_6];
         let randomIndex = Math.floor(Math.random() * diceImages.length);
 
-        // 前回のボタン押下時の値と異なるランダムな値を生成する
-        while (randomIndex === prevRandomIndex) {
-            randomIndex = Math.floor(Math.random() * diceImages.length);
+        if (!isdiceroll) {
+            // 前回のボタン押下時の値と異なるランダムな値を生成する
+            while (randomIndex === prevRandomIndex) {
+                randomIndex = Math.floor(Math.random() * diceImages.length);
+            }
+
+            setdiceroll(true)
+            setAnounce("")
+
+            // 値を更新する前に現在の値を保存する
+            setPrevRandomIndex(randomIndex);
+
+            setDicePath(diceImages[randomIndex]);
+            setIsBoxVisible(false);
+            setTimeout(() => {
+                setIsBoxVisible(true);
+            }, 800);
+        } else {
+            setAnounce("サイコロをふってください")
         }
-
-        setdiceroll(true)
-
-        // 値を更新する前に現在の値を保存する
-        setPrevRandomIndex(randomIndex);
-
-        setDicePath(diceImages[randomIndex]);
-        setIsBoxVisible(false);
-        setTimeout(() => {
-            setIsBoxVisible(true);
-        }, 800);
     };
 
     useEffect(() => {
@@ -161,6 +180,8 @@ export const GameComponent = () => {
                         <Button variant="contained" color="inherit" sx={{ fontSize: "18px", position: "relative", width: '100px', height: '50px', }}>1つ戻る</Button>
                         <Button variant="contained" color="inherit" sx={{ fontSize: "18px", position: "relative", width: '100px', height: '50px', }}>1つ進む</Button>
                     </Grid>
+                    <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "18px", position: "relative", width: '200px', height: '50px', }}>このマスに止まる</Button>
+                    <Box sx={{ fontSize: "32px", color: "red" }}>{anounceDiceroll}</Box>
                 </Grid>
             </Grid>
         </Box>
