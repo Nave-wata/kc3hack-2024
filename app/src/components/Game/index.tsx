@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { is_set } from "../../utils/isType";
 import { create } from "domain";
 import Kinki from "../../assets/images/Kinki";
@@ -11,6 +11,7 @@ export const GameComponent = () => {
     const screenOrientation = window.screen.orientation;
     const [dicePath, setDicePath] = useState(default_dice); // dicePathとその更新関数をuseStateフックで定義
     const [prevRandomIndex, setPrevRandomIndex] = useState(-1); // 前回のランダムインデックスを保持するステート
+    const [isBoxVisible, setIsBoxVisible] = useState(false); // ボックスの表示状態を保持するステート
 
     const containerStyle: React.CSSProperties = {
         margin: 0,
@@ -60,7 +61,15 @@ export const GameComponent = () => {
         setPrevRandomIndex(randomIndex);
 
         setDicePath(diceImages[randomIndex]);
+        setIsBoxVisible(false);
+        setTimeout(() => {
+            setIsBoxVisible(true);
+        }, 800);
     };
+
+    useEffect(() => {
+        setIsBoxVisible(true);
+    },[]);
 
     return (
         <Box style={containerStyle}>
@@ -85,7 +94,7 @@ export const GameComponent = () => {
                         </Button>
                     </Box>
                     <br/>
-                    <Box sx={{fontSize: "64px"}}>{prevRandomIndex+1}</Box>
+                    {isBoxVisible && (<Box sx={{fontSize: "64px"}}>{prevRandomIndex+1}</Box>)}
                 </Grid>
             </Grid>
         </Box>
