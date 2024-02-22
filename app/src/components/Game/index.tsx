@@ -3,13 +3,13 @@ import { is_set } from "../../utils/isType";
 import { create } from "domain";
 import Kinki from "../../assets/images/Kinki";
 import { Box, Button, Grid } from "@mui/material";
-import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6 } from "../../assets/images/Dice/index";
+import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6, default_dice } from "../../assets/images/Dice/index";
 
 
 export const GameComponent = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const screenOrientation = window.screen.orientation;
-    const [dicePath, setDicePath] = useState(""); // dicePathとその更新関数をuseStateフックで定義
+    const [dicePath, setDicePath] = useState(default_dice); // dicePathとその更新関数をuseStateフックで定義
     const [prevRandomIndex, setPrevRandomIndex] = useState(-1); // 前回のランダムインデックスを保持するステート
 
     const containerStyle: React.CSSProperties = {
@@ -84,6 +84,8 @@ export const GameComponent = () => {
                             サイコロを振る
                         </Button>
                     </Box>
+                    <br/>
+                    <Box sx={{fontSize: "64px"}}>{prevRandomIndex+1}</Box>
                 </Grid>
             </Grid>
         </Box>
