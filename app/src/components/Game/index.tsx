@@ -16,10 +16,10 @@ export const GameComponent = () => {
         margin: 0,
         padding: 0,
         backgroundColor: '#02C5FC',
+        flexDirection: 'row',  // column から row に変更
         fontFamily: 'sans-serif',
         minHeight: '100vh',
         display: 'flex',
-        flexDirection: 'column', // ボタンとSVGを縦方向に配置するためにflex-directionを指定
         alignItems: 'center', // 横方向に中央揃え
         justifyContent: 'center', // 縦方向に中央揃え
         color: '#000000',
@@ -64,13 +64,26 @@ export const GameComponent = () => {
 
     return (
         <Box style={containerStyle}>
-            <Button variant="contained" color="inherit" sx={{ fontSize: "25px", position: "relative", width: '200px', height: '100px', top: '300px', right: '300px' }} onClick={() => dice_roll()}>サイコロを振る</Button>
-            <img src={dicePath} alt="" />
-            <Grid>
-                <Grid >
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1600" height="1200">
+            <Grid container xs={12} >
+                <Grid item>
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1350" height="1200">
                         {Kinki()}
                     </svg>
+                </Grid>
+                <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+                    <Box>
+                        {dicePath && <img src={dicePath} alt="dice" />}
+                    </Box>
+                    <Box>
+                        <Button
+                            variant="contained"
+                            color="inherit"
+                            sx={{ fontSize: "25px", position: "relative", width: '200px', height: '100px', top: '0%', right: '0%' }}
+                            onClick={dice_roll}
+                        >
+                            サイコロを振る
+                        </Button>
+                    </Box>
                 </Grid>
             </Grid>
         </Box>
