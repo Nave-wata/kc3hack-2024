@@ -2,6 +2,7 @@ import React from "react";
 import { is_set } from "../../utils/isType";
 import { create } from "domain";
 import Kinki from "../../assets/images/Kinki";
+import charactor1 from "../../assets/images/Charactor/charactor1.png";
 
 
 export const GameComponent = () => {
@@ -43,6 +44,7 @@ export const GameComponent = () => {
         <div style={containerStyle}>
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1600" height="1200">
                 {Kinki()}
+                <image href={charactor1} x="750" y="540" width="30" height="30" />
             </svg>
         </div>
     )
