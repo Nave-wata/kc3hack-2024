@@ -45,14 +45,7 @@ export const GameComponent = () => {
         position: 'relative', // 相対位置を設定
     };
 
-    const backgroundImageStyle: React.CSSProperties = {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: -1,
-    };
+
 
     // 画面を横向きに固定
     if (is_set(screenOrientation) && (screenOrientation as any).lock) {
@@ -158,8 +151,12 @@ export const GameComponent = () => {
                             サイコロを振る
                         </Button>
                     </Box>
-                    <br />
-                    {isBoxVisible && (<Box sx={{ fontSize: "64px" }}>{prevRandomIndex + 1}</Box>)}
+
+                    {isBoxVisible && (<Box sx={{ fontSize: "64px" }}>出目：{prevRandomIndex + 1}</Box>)}
+                    <Grid container justifyContent="center" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                        <Button variant="contained" color="inherit">1つ戻る</Button>
+                        <Button variant="contained" color="inherit">1つ進む</Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </Box>
