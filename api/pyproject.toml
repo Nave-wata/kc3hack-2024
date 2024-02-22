@@ -12,6 +12,7 @@ uvicorn = {extras = ["standard"], version = "^0.27.1"}
 sqlalchemy = "^2.0.27"
 aiomysql = "^0.2.0"
 python-dotenv = "^1.0.1"
+openai = "^1.12.0"
 
 
 [build-system]
