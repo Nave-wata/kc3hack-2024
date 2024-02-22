@@ -151,11 +151,15 @@ export const GameComponent = () => {
                             サイコロを振る
                         </Button>
                     </Box>
-
-                    {isBoxVisible && (<Box sx={{ fontSize: "64px" }}>出目：{prevRandomIndex + 1}</Box>)}
                     <Grid container justifyContent="center" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <Button variant="contained" color="inherit">1つ戻る</Button>
-                        <Button variant="contained" color="inherit">1つ進む</Button>
+                        <Box sx={{ fontSize: "64px" }}>出目：</Box>
+                        {isBoxVisible && (<Box sx={{ fontSize: "64px" }}>{prevRandomIndex + 1}</Box>)}
+                    </Grid>
+
+
+                    <Grid container justifyContent="center" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                        <Button variant="contained" color="inherit" sx={{ fontSize: "18px", position: "relative", width: '100px', height: '50px', }}>1つ戻る</Button>
+                        <Button variant="contained" color="inherit" sx={{ fontSize: "18px", position: "relative", width: '100px', height: '50px', }}>1つ進む</Button>
                     </Grid>
                 </Grid>
             </Grid>
