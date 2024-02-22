@@ -70,7 +70,7 @@ export const Home = () => {
               <Box sx={{ minHeight: '100vh', minWidth: '100vw', justifyContent: "space-between" }}>
                 <Grid container spacing={1} alignItems="center" justifyContent="center" direction="column">
                     <Grid item xs={12} sx={{ paddingBottom: 4}}>
-                        <Box sx={{marginTop:'380px'}}>
+                        <Box sx={{marginTop:'300%'}}>
                             <Button variant="contained" onClick={() => handleGameStart()}>ゲームスタート</Button>
                         </Box>
                     </Grid>
