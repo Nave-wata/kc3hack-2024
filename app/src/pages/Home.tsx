@@ -3,10 +3,11 @@ import * as React from 'react';
 import '../index.css';
 import { GameComponent } from "../components/Game";
 import Background from '../assets/images/Background/background.png';
-import {Box,
+import {
+    Box,
     Button,
     Grid
-}from "@mui/material";
+} from "@mui/material";
 
 const head = () => {
     return (
@@ -33,24 +34,18 @@ export const Home = () => {
     const [isFullScreen, setIsFullScreen] = React.useState<boolean>(document.fullscreenElement ? true : false);
 
     const handleGameStart = () => {
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-            setIsFullScreen(false);
-        } else {
-            document.documentElement.requestFullscreen();
-            setIsFullScreen(true);
-        }
+        setIsFullScreen(true);
     }
 
     const HomeComponent = () => (
         <Box sx={image}>
             <Box sx={{ minHeight: '100vh', minWidth: '100vw', justifyContent: "space-between" }}>
-                <Grid container spacing={2} direction="column" alignItems="center" justifyContent="center" style={{minHeight: '100vh' }} >
+                <Grid container spacing={2} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '100vh' }} >
                     <Grid item xs={12} sx={{ paddingBottom: 3 }}>
-                        <Box sx={{ marginTop: '300px'}}>
-                        <Button variant="contained" color='inherit' size="large" onClick={() => handleGameStart()}>
-                            ゲームスタート
-                        </Button>
+                        <Box sx={{ marginTop: '300px' }}>
+                            <Button variant="contained" color='inherit' size="large" onClick={() => handleGameStart()}>
+                                ゲームスタート
+                            </Button>
                         </Box>
                     </Grid>
                 </Grid>
