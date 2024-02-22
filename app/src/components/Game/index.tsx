@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, { useEffect } from "react";
+import {useState} from "react";
 import { is_set } from "../../utils/isType";
 import { create } from "domain";
 import Kinki from "../../assets/images/Kinki";
@@ -8,7 +9,7 @@ import charactor3 from "../../assets/images/Charactor/charactor3.png";
 import charactor4 from "../../assets/images/Charactor/charactor4.png";
 import {Coordinate} from "./Coordinate";
 import { Box, Button, Grid } from "@mui/material";
-import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6 } from "../../assets/images/Dice/index";
+import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6, default_dice } from "../../assets/images/Dice/index";
 
 interface CoordinateType {
     x: number;
@@ -23,8 +24,9 @@ let i4 = 0;
 export const GameComponent = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const screenOrientation = window.screen.orientation;
-    const [dicePath, setDicePath] = useState(""); // dicePathとその更新関数をuseStateフックで定義
+    const [dicePath, setDicePath] = useState(default_dice); // dicePathとその更新関数をuseStateフックで定義
     const [prevRandomIndex, setPrevRandomIndex] = useState(-1); // 前回のランダムインデックスを保持するステート
+    const [isBoxVisible, setIsBoxVisible] = useState(false); // ボックスの表示状態を保持するステート
 
     const containerStyle: React.CSSProperties = {
         margin: 0,
@@ -121,7 +123,15 @@ export const GameComponent = () => {
         setPrevRandomIndex(randomIndex);
 
         setDicePath(diceImages[randomIndex]);
+        setIsBoxVisible(false);
+        setTimeout(() => {
+            setIsBoxVisible(true);
+        }, 800);
     };
+
+    useEffect(() => {
+        setIsBoxVisible(true);
+    }, []);
 
     return (
         <Box style={containerStyle}>
@@ -154,6 +164,8 @@ export const GameComponent = () => {
                             サイコロを振る
                         </Button>
                     </Box>
+                    <br />
+                    {isBoxVisible && (<Box sx={{ fontSize: "64px" }}>{prevRandomIndex + 1}</Box>)}
                 </Grid>
             </Grid>
         </Box>
