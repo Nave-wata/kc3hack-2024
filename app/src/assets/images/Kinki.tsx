@@ -1,6 +1,10 @@
 import React from "react";
 import normalmasu from "./Masu/masu3.png"
 import eventlmasu from "./Masu/eventmasu.png"
+import goal from "./Masu/goal.png"
+import goalflag from "./Masu/goalflag.png"
+import start from "./Masu/start.png"
+import startflag from "./Masu/startflag.png"
 
 function onHover<T>(e: React.MouseEvent<T>, ...hoverHandlers: Array<(e: React.MouseEvent<T>) => void>) {
   hoverHandlers.forEach((place) => place(e));
@@ -498,8 +502,10 @@ export default function Kinki() {
       {/*大阪*/}
       <image href={normalmasu} x="710" y="410" width={masu_width} height={masu_height} />
       <image href={eventlmasu} x="760" y="480" width={masu_width} height={masu_height} />
-      <image href={eventlmasu} x="750" y="550" width={masu_width} height={masu_height} />
-      <image href={eventlmasu} x="790" y="570" width={masu_width} height={masu_height} />
+      <image href={start} x="750" y="550" width={masu_width} height={masu_height} />
+      <image href={startflag} x="765" y="535" width={masu_width} height={masu_height} />
+      <image href={goal} x="790" y="570" width={masu_width} height={masu_height} />
+      <image href={goalflag} x="805" y="555" width={masu_width} height={masu_height} />
       <image href={normalmasu} x="750" y="640" width={masu_width} height={masu_height} />
       <image href={normalmasu} x="680" y="700" width={masu_width} height={masu_height} />
       {/*大阪*/}
