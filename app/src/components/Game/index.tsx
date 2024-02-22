@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { is_set } from "../../utils/isType";
 import { create } from "domain";
 import Kinki from "../../assets/images/Kinki";
@@ -40,11 +40,20 @@ export const GameComponent = () => {
             });
     }
 
+    const [charactorX, setCharactorX] = useState<number>(750);
+    const [charactorY, setCharactorY] = useState<number>(540);
+
+    const handleClick = () => {
+        setCharactorX(prevX => prevX + 10);
+        setCharactorY(prevY => prevY + 10); 
+    }
+
     return (
         <div style={containerStyle}>
+            <button onClick={handleClick}>click</button>
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1600" height="1200">
                 {Kinki()}
-                <image href={charactor1} x="750" y="540" width="30" height="30" />
+                <image href={charactor1} x={charactorX} y={charactorY} width="30" height="30" />
             </svg>
         </div>
     )
