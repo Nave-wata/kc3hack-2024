@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { is_set } from "../../utils/isType";
 import { create } from "domain";
 import Kinki from "../../assets/images/Kinki";
@@ -69,7 +70,7 @@ export const GameComponent = () => {
 
     useEffect(() => {
         setIsBoxVisible(true);
-    },[]);
+    }, []);
 
     return (
         <Box style={containerStyle}>
@@ -93,8 +94,8 @@ export const GameComponent = () => {
                             サイコロを振る
                         </Button>
                     </Box>
-                    <br/>
-                    {isBoxVisible && (<Box sx={{fontSize: "64px"}}>{prevRandomIndex+1}</Box>)}
+                    <br />
+                    {isBoxVisible && (<Box sx={{ fontSize: "64px" }}>{prevRandomIndex + 1}</Box>)}
                 </Grid>
             </Grid>
         </Box>
