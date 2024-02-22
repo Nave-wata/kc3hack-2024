@@ -32,6 +32,7 @@ export const GameComponent = () => {
     const [isdiceroll, setdiceroll] = useState(false);// サイコロがふられたかを保持するステート
     const [anounceDiceroll, setAnounce] = useState("");// 「サイコロをふってください」のテキストを格納するステート
     const [diceMaximum, setdiceMaximum] = useState(0);
+    const [diceMinimum, setdiceMinimum] = useState(0);
 
     const containerStyle: React.CSSProperties = {
         margin: 0,
@@ -139,6 +140,50 @@ export const GameComponent = () => {
         }
     }
 
+    const back_1step = () => {
+
+        setAnounce("")
+
+
+        if (isdiceroll) {
+            if (turn === 1) {
+                if (!(i1 <= diceMinimum)) {
+                    i1 = (i1 - 1) % coordinates.length;
+                    setCharactor1X(coordinates[i1].x - 20);
+                    setCharactor1Y(coordinates[i1].y - 20);
+                } else {
+                    setAnounce("それ以上戻れません")
+                }
+            } else if (turn === 2) {
+                if (!(i2 <= diceMinimum)) {
+                    i2 = (i2 - 1) % coordinates.length;
+                    setCharactor2X(coordinates[i2].x);
+                    setCharactor2Y(coordinates[i2].y - 20);
+                } else {
+                    setAnounce("それ以上戻れません")
+                }
+            } else if (turn === 3) {
+                if (!(i3 <= diceMinimum)) {
+                    i3 = (i3 - 1) % coordinates.length;
+                    setCharactor3X(coordinates[i3].x - 20);
+                    setCharactor3Y(coordinates[i3].y);
+                } else {
+                    setAnounce("それ以上戻れません")
+                }
+            } else if (turn === 4) {
+                if (!(i4 <= diceMinimum)) {
+                    i4 = (i4 - 1) % coordinates.length;
+                    setCharactor4X(coordinates[i4].x);
+                    setCharactor4Y(coordinates[i4].y);
+                } else {
+                    setAnounce("それ以上戻れません")
+                }
+            }
+        } else {
+            setAnounce("サイコロをふってください")
+        }
+    }
+
     const stopMasu = () => {
         if (isdiceroll) {
             setAnounce("")
@@ -152,8 +197,6 @@ export const GameComponent = () => {
             setAnounce("サイコロをふってください")
         }
     }
-
-
 
 
     const dice_roll = () => {
@@ -183,6 +226,22 @@ export const GameComponent = () => {
                 setdiceMaximum(i4 + randomIndex + 1)
             }
             //ここまで
+
+            //出目の最小を設定↓↓
+            if (turn == 1) {
+                setdiceMinimum(i1)
+            }
+            if (turn == 2) {
+                setdiceMinimum(i2)
+            }
+            if (turn == 3) {
+                setdiceMinimum(i3)
+            }
+            if (turn == 4) {
+                setdiceMinimum(i4)
+            }
+            //ここまで
+
 
 
             // 値を更新する前に現在の値を保存する
@@ -237,7 +296,7 @@ export const GameComponent = () => {
 
 
                     <Grid container justifyContent="center" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <Button variant="contained" color="inherit" sx={{ fontSize: "18px", position: "relative", width: '100px', height: '50px', }}>1つ戻る</Button>
+                        <Button variant="contained" color="inherit" onClick={back_1step} sx={{ fontSize: "18px", position: "relative", width: '100px', height: '50px', }}>1つ戻る</Button>
                         <Button variant="contained" color="inherit" onClick={move_1step} sx={{ fontSize: "18px", position: "relative", width: '100px', height: '50px', }}>1つ進む</Button>
                     </Grid>
                     <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "18px", position: "relative", width: '200px', height: '50px', }}>このマスに止まる</Button>
