@@ -2,7 +2,7 @@ import { MainLayout } from "../components/Layout/MainLayout";
 import * as React from 'react';
 import '../index.css';
 import { GameComponent } from "../components/Game";
-import Background from '../assets/images/background.png';
+import Background from '../assets/images/Background/background.png';
 import {Box,
     Button,
     Grid
