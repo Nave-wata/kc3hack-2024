@@ -31,8 +31,8 @@ export const GameComponent = () => {
     const [isBoxVisible, setIsBoxVisible] = useState(false); // ボックスの表示状態を保持するステート
     const [isdiceroll, setdiceroll] = useState(false);// サイコロがふられたかを保持するステート
     const [anounceDiceroll, setAnounce] = useState("");// 「サイコロをふってください」のテキストを格納するステート
-    const [diceMaximum, setdiceMaximum] = useState(0);
-    const [diceMinimum, setdiceMinimum] = useState(0);
+    const [diceMaximum, setdiceMaximum] = useState(0);//出目の最大値を設定
+    const [diceMinimum, setdiceMinimum] = useState(0);//出目の最小値を設定
 
     const containerStyle: React.CSSProperties = {
         margin: 0,
@@ -69,41 +69,15 @@ export const GameComponent = () => {
     const [charactor4Y, setCharactor4Y] = useState<number | undefined>(560);
     const coordinates: CoordinateType[] = Coordinate();
 
-    const handleClick = () => {
-        if (isdiceroll) {
-            if (turn === 1) {
-                i1 = (i1 + prevRandomIndex + 1) % coordinates.length;
-                setCharactor1X(coordinates[i1].x - 20);
-                setCharactor1Y(coordinates[i1].y - 20);
-                turn++;
-            } else if (turn === 2) {
-                i2 = (i2 + prevRandomIndex + 1) % coordinates.length;
-                setCharactor2X(coordinates[i2].x);
-                setCharactor2Y(coordinates[i2].y - 20);
-                turn++;
-            } else if (turn === 3) {
-                i3 = (i3 + prevRandomIndex + 1) % coordinates.length;
-                setCharactor3X(coordinates[i3].x - 20);
-                setCharactor3Y(coordinates[i3].y);
-                turn++;
-            } else if (turn === 4) {
-                i4 = (i4 + prevRandomIndex + 1) % coordinates.length;
-                setCharactor4X(coordinates[i4].x);
-                setCharactor4Y(coordinates[i4].y);
-                turn = 1;
-            }
-        }
-        setdiceroll(false)
 
-    }
-    const move_1step = () => {
+    const move_1step = () => {              //1マス進む
 
         setAnounce("")
 
 
-        if (isdiceroll) {
+        if (isdiceroll) {           //サイコロがふられたか
             if (turn === 1) {
-                if (i1 < diceMaximum) {
+                if (i1 < diceMaximum) {     //現在の1pの位置がサイコロの出目の最大値より前に居るか
                     i1 = (i1 + 1) % coordinates.length;
                     setCharactor1X(coordinates[i1].x - 20);
                     setCharactor1Y(coordinates[i1].y - 20);
@@ -140,7 +114,7 @@ export const GameComponent = () => {
         }
     }
 
-    const back_1step = () => {
+    const back_1step = () => {              //1マスもどる
 
         setAnounce("")
 
@@ -184,15 +158,15 @@ export const GameComponent = () => {
         }
     }
 
-    const stopMasu = () => {
-        if (isdiceroll) {
+    const stopMasu = () => {        //止まるマスの決定
+        if (isdiceroll) {           //サイコロがふられたか
             setAnounce("")
             if (turn == 4) {
                 turn = 1
             } else {
                 turn++
             }
-            setdiceroll(false)
+            setdiceroll(false)     //プレイヤーの位置が決まったのでサイコロをふれる状態にする
         } else {
             setAnounce("サイコロをふってください")
         }
@@ -273,9 +247,10 @@ export const GameComponent = () => {
                         <image href={charactor4} x={charactor4X} y={charactor4Y} width="30" height="30" />
                     </svg>
                 </Grid>
-                <div>{turn}</div>
-                <button onClick={handleClick}>1</button>
                 <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+                    <Box sx={{ fontSize: "64px" }}>
+                        {turn}Pのターン
+                    </Box>
                     <Box>
                         {dicePath && <img src={dicePath} alt="dice" />}
                     </Box>
