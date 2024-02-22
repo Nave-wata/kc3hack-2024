@@ -15,10 +15,10 @@ interface CoordinateType {
     y: number;
 }
 
-let i1 = 1;
-let i2 = 1;
-let i3 = 1;
-let i4 = 1;
+let i1 = 0;
+let i2 = 0;
+let i3 = 0;
+let i4 = 0;
 
 export const GameComponent = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -69,30 +69,34 @@ export const GameComponent = () => {
     const coordinates: CoordinateType[] = Coordinate();
 
     const handleClick1 = () => {
+        i1 = (i1 + prevRandomIndex + 1) % coordinates.length;
         setCharactor1X(coordinates[i1].x-20);
         setCharactor1Y(coordinates[i1].y-20);
-        i1 = (i1 + 1) % coordinates.length;
     }
 
     const handleClick2 = () => {
+        i2 = (i2 + prevRandomIndex + 1) % coordinates.length;
         setCharactor2X(coordinates[i2].x);
         setCharactor2Y(coordinates[i2].y-20);
-        i2 = (i2 + 1) % coordinates.length;
     }
 
     const handleClick3 = () => {
+        i3 = (i3 + prevRandomIndex + 1) % coordinates.length;
         setCharactor3X(coordinates[i3].x-20);
         setCharactor3Y(coordinates[i3].y);
-        i3 = (i3 + 1) % coordinates.length;
     }
 
     const handleClick4 = () => {
+        i4 = (i4 + prevRandomIndex + 1) % coordinates.length;
         setCharactor4X(coordinates[i4].x);
         setCharactor4Y(coordinates[i4].y);
-        i4 = (i4 + 1) % coordinates.length;
     }
 
     const handleClick = () => {
+        i1 = (i1 + 1) % coordinates.length;
+        i2 = (i2 + 1) % coordinates.length;
+        i3 = (i3 + 1) % coordinates.length;
+        i4 = (i4 + 1) % coordinates.length;
         setCharactor1X(coordinates[i1].x-20);
         setCharactor1Y(coordinates[i1].y-20); 
         setCharactor2X(coordinates[i2].x);
@@ -101,11 +105,6 @@ export const GameComponent = () => {
         setCharactor3Y(coordinates[i3].y);
         setCharactor4X(coordinates[i4].x);
         setCharactor4Y(coordinates[i4].y);
-        
-        i1 = (i1 + 1) % coordinates.length;
-        i2 = (i2 + 1) % coordinates.length;
-        i3 = (i3 + 1) % coordinates.length;
-        i4 = (i4 + 1) % coordinates.length;
     }
 
     const dice_roll = () => {
