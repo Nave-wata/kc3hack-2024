@@ -21,6 +21,8 @@ let i2 = 0;
 let i3 = 0;
 let i4 = 0;
 
+let turn = 1;
+
 export const GameComponent = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const screenOrientation = window.screen.orientation;
@@ -71,27 +73,39 @@ export const GameComponent = () => {
     const coordinates: CoordinateType[] = Coordinate();
 
     const handleClick1 = () => {
-        i1 = (i1 + prevRandomIndex + 1) % coordinates.length;
-        setCharactor1X(coordinates[i1].x-20);
-        setCharactor1Y(coordinates[i1].y-20);
+        if(turn === 1){
+            i1 = (i1 + prevRandomIndex + 1) % coordinates.length;
+            setCharactor1X(coordinates[i1].x-20);
+            setCharactor1Y(coordinates[i1].y-20);
+            turn++;
+        }
     }
 
     const handleClick2 = () => {
-        i2 = (i2 + prevRandomIndex + 1) % coordinates.length;
-        setCharactor2X(coordinates[i2].x);
-        setCharactor2Y(coordinates[i2].y-20);
+        if(turn === 2){
+            i2 = (i2 + prevRandomIndex + 1) % coordinates.length;
+            setCharactor2X(coordinates[i2].x);
+            setCharactor2Y(coordinates[i2].y-20);
+            turn++;
+        }
     }
 
     const handleClick3 = () => {
-        i3 = (i3 + prevRandomIndex + 1) % coordinates.length;
-        setCharactor3X(coordinates[i3].x-20);
-        setCharactor3Y(coordinates[i3].y);
+        if(turn === 3){
+            i3 = (i3 + prevRandomIndex + 1) % coordinates.length;
+            setCharactor3X(coordinates[i3].x-20);
+            setCharactor3Y(coordinates[i3].y);
+            turn++;
+        }
     }
 
     const handleClick4 = () => {
-        i4 = (i4 + prevRandomIndex + 1) % coordinates.length;
-        setCharactor4X(coordinates[i4].x);
-        setCharactor4Y(coordinates[i4].y);
+        if(turn === 4){
+            i4 = (i4 + prevRandomIndex + 1) % coordinates.length;
+            setCharactor4X(coordinates[i4].x);
+            setCharactor4Y(coordinates[i4].y);
+            turn = 1;
+        }
     }
 
     const handleClick = () => {
@@ -145,6 +159,7 @@ export const GameComponent = () => {
                         <image href={charactor4} x={charactor4X} y={charactor4Y} width="30" height="30" />
                     </svg>
                 </Grid>
+                <div>{turn}</div>
                 <button onClick={handleClick1}>1</button>
                 <button onClick={handleClick2}>2</button>
                 <button onClick={handleClick3}>3</button>
