@@ -1,6 +1,10 @@
 import React from "react";
 import normalmasu from "./Masu/masu3.png"
 import eventlmasu from "./Masu/eventmasu.png"
+import goal from "./Masu/goal.png"
+import goalflag from "./Masu/goalflag.png"
+import start from "./Masu/start.png"
+import startflag from "./Masu/startflag.png"
 
 function onHover<T>(e: React.MouseEvent<T>, ...hoverHandlers: Array<(e: React.MouseEvent<T>) => void>) {
   hoverHandlers.forEach((place) => place(e));
@@ -448,7 +452,9 @@ export default function Kinki() {
       <line x1="405" y1="280" x2="395" y2="360" stroke="yellow" stroke-width="3"/>
       <line x1="395" y1="360" x2="455" y2="465" stroke="yellow" stroke-width="3"/>
       <line x1="455" y1="465" x2="525" y2="475" stroke="yellow" stroke-width="3"/>
-      <line x1="525" y1="475" x2="595" y2="495" stroke="yellow" stroke-width="3"/>
+      <line x1="525" y1="475" x2="485" y2="740" stroke="yellow" stroke-width="3"/>
+      <line x1="485" y1="740" x2="530" y2="660" stroke="yellow" stroke-width="3"/>
+      <line x1="530" y1="660" x2="595" y2="495" stroke="yellow" stroke-width="3"/>
       <line x1="595" y1="495" x2="585" y2="380" stroke="yellow" stroke-width="3"/>
       <line x1="585" y1="380" x2="725" y2="420" stroke="yellow" stroke-width="3"/>
       {/*大阪ゴール*/}
@@ -464,6 +470,8 @@ export default function Kinki() {
       <image href={eventlmasu} x="440" y="450" width={masu_width} height={masu_height} />
       <image href={normalmasu} x="510" y="460" width={masu_width} height={masu_height} />
       <image href={eventlmasu} x="580" y="480" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="510" y="650" width={masu_width} height={masu_height} />
+      <image href={normalmasu} x="470" y="730" width={masu_width} height={masu_height} />
       {/*兵庫*/}
       {/*京都*/}
       <image href={eventlmasu} x="590" y="130" width={masu_width} height={masu_height} />
@@ -498,8 +506,10 @@ export default function Kinki() {
       {/*大阪*/}
       <image href={normalmasu} x="710" y="410" width={masu_width} height={masu_height} />
       <image href={eventlmasu} x="760" y="480" width={masu_width} height={masu_height} />
-      <image href={eventlmasu} x="750" y="550" width={masu_width} height={masu_height} />
-      <image href={eventlmasu} x="790" y="570" width={masu_width} height={masu_height} />
+      <image href={start} x="750" y="550" width={masu_width} height={masu_height} />
+      <image href={startflag} x="765" y="535" width={masu_width} height={masu_height} />
+      <image href={goal} x="790" y="570" width={masu_width} height={masu_height} />
+      <image href={goalflag} x="805" y="555" width={masu_width} height={masu_height} />
       <image href={normalmasu} x="750" y="640" width={masu_width} height={masu_height} />
       <image href={normalmasu} x="680" y="700" width={masu_width} height={masu_height} />
       {/*大阪*/}
