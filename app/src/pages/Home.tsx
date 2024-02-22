@@ -47,7 +47,7 @@ export const Home = () => {
             <Box sx={{ minHeight: '100vh', minWidth: '100vw', justifyContent: "space-between" }}>
                 <Grid container spacing={2} direction="column" alignItems="center" justifyContent="center" style={{minHeight: '100vh' }} >
                     <Grid item xs={12} sx={{ paddingBottom: 3 }}>
-                        <Box sx={{ marginTop: '200px'}}>
+                        <Box sx={{ marginTop: '300px'}}>
                         <Button variant="contained" color='inherit' size="large" onClick={() => handleGameStart()}>
                             ゲームスタート
                         </Button>
