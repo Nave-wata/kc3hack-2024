@@ -1,10 +1,10 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import { usePelmanism } from "../api/getPelmanism";
 import { is_set } from "../../../utils/isType";
 import { PelmanismItem, PelmanismResponse } from "../types";
-import { shuffleArray } from "../../../utils/array";
+import { getRandomValues, shuffleArray } from "../../../utils/array";
 
-export function Pelmanism() {
+export function Pelmanism({ pairNumber }: {pairNumber: number}) {
   const [pelmanismItems, setPelmanismItems] = React.useState<PelmanismItem[]>([]);
   const [openItems, setOpenItems] = React.useState<PelmanismItem[]>([]);
   const [isShows, setIsShows] = React.useState<boolean[]>([]);
@@ -13,9 +13,10 @@ export function Pelmanism() {
 
   React.useEffect(() => {
     if (is_set<PelmanismResponse[]>(pelmanismQuery.data)) {
-      const items = pelmanismQuery.data.map((item) => [{id: item.id, text: item.kansai}, {id: item.id, text: item.default}]);
-      setPelmanismItems(shuffleArray(items.flat()));
-      setIsShows(new Array(pelmanismQuery.data.length * 2).fill(false));
+      const randomItems = getRandomValues<PelmanismResponse>(pelmanismQuery.data, pairNumber);
+      const items = randomItems.map((item) => [{id: item.id, text: item.kansai}, {id: item.id, text: item.default}]);
+      setPelmanismItems(shuffleArray<PelmanismItem>(items.flat()));
+      setIsShows(new Array(items.length).fill(false));
     }
   }, [pelmanismQuery.data]);
 
@@ -39,6 +40,7 @@ export function Pelmanism() {
       return;
     }
 
+    console.log(isShows);
     const resetIsShows = newIsShows.map((value, itemIndex) => pelmanismItems[itemIndex].id === openItems[0].id || pelmanismItems[itemIndex].id === item.id ? false : value);
     setIsResetting(true);
 
