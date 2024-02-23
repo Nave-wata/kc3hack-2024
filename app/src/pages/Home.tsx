@@ -56,7 +56,7 @@ export const Home = () => {
 
     return (
         <MainLayout title={"関西双六 - " + isFullScreen ? "ようこそ！" : "ゲーム"} head={head()}>
-            {isFullScreen ? <GameClearComponent /> : HomeComponent()}
+            {isFullScreen ? <GameComponent /> : HomeComponent()}
         </MainLayout>
     )
 }
