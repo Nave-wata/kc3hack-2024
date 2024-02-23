@@ -18,7 +18,7 @@ async def index(request: BokeEvaluationRequest):
     """
     ranks = evaluate_boke(request.bokes)
 
-    if len(ranks) != len(request.bokes):
-        raise HTTPException(status_code=500, detail="The number of blurbs received and the number of rankings processed are different.")
+    if len(ranks) < len(request.bokes):
+        raise HTTPException(status_code=500, detail="Failed to rank.")
 
     return BokeEvaluationResponse(ranks=ranks)
