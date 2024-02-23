@@ -14,6 +14,7 @@ import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6, default_dice } from "..
 interface CoordinateType {
     x: number;
     y: number;
+    eventflag: boolean;
 }
 
 let i1 = 0;
@@ -61,6 +62,7 @@ export const GameComponent = () => {
 
     const [charactor1X, setCharactor1X] = useState<number | undefined>(745);
     const [charactor1Y, setCharactor1Y] = useState<number | undefined>(540);
+    const [charactoreventflag, setCharactoreventflag] = useState<boolean | undefined>(false); //プレイヤーのイベントフラグ
     const [charactor2X, setCharactor2X] = useState<number | undefined>(765);
     const [charactor2Y, setCharactor2Y] = useState<number | undefined>(540);
     const [charactor3X, setCharactor3X] = useState<number | undefined>(745);
@@ -160,6 +162,7 @@ export const GameComponent = () => {
 
     const stopMasu = () => {        //止まるマスの決定
         if (isdiceroll) {           //サイコロがふられたか
+            setCharactoreventflag(coordinates[i1].eventflag); //止まるマスにイベントがあるか
             setAnounce("")
             if (turn == 4) {
                 turn = 1
@@ -276,6 +279,7 @@ export const GameComponent = () => {
                     </Grid>
                     <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "18px", position: "relative", width: '200px', height: '50px', }}>このマスに止まる</Button>
                     <Box sx={{ fontSize: "32px", color: "red" }}>{anounceDiceroll}</Box>
+                    {charactoreventflag ? <Box sx={{ fontSize: "32px", color: "red" }}>イベント発生</Box> : <div />}
                 </Grid>
             </Grid>
         </Box>
