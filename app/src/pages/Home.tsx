@@ -8,6 +8,7 @@ import {
     Button,
     Grid
 } from "@mui/material";
+import { GameClearComponent } from "../components/Game/gameClearCompornent";
 
 const head = () => {
     return (
@@ -55,7 +56,7 @@ export const Home = () => {
 
     return (
         <MainLayout title={"関西双六 - " + isFullScreen ? "ようこそ！" : "ゲーム"} head={head()}>
-            {isFullScreen ? <GameComponent /> : HomeComponent()}
+            {isFullScreen ? <GameClearComponent /> : HomeComponent()}
         </MainLayout>
     )
 }
