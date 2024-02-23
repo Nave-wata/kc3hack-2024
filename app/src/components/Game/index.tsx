@@ -8,7 +8,7 @@ import charactor2 from "../../assets/images/Charactor/charactor2.png";
 import charactor3 from "../../assets/images/Charactor/charactor3.png";
 import charactor4 from "../../assets/images/Charactor/charactor4.png";
 import { Coordinate } from "./Coordinate";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6, default_dice } from "../../assets/images/Dice/index";
 
 interface CoordinateType {
@@ -296,9 +296,12 @@ export const GameComponent = () => {
                         <image href={charactor2} x={charactor2X} y={charactor2Y} width="30" height="30" />
                         <image href={charactor3} x={charactor3X} y={charactor3Y} width="30" height="30" />
                         <image href={charactor4} x={charactor4X} y={charactor4Y} width="30" height="30" />
-                        {turn == 1 ? <image href={charactor1} x="1200" y="20" width="150" height="150"/> : turn == 2 ? <image href={charactor2} x="1200" y="20" width="150" height="150"/>
-                            : turn == 3 ? <image href={charactor3} x="1200" y="20" width="150" height="150"/> : <image href={charactor4} x="1200" y="20" width="150" height="150"/>}
+                        
                     </svg>
+                </Grid>
+                <Grid item style={{ position: 'relative', top: '100px', left: '500px' }}>
+                    {turn == 1 ? <img src={charactor1} style={{ width: '500%', height: 'auto' }}/> : turn == 2 ? <img src={charactor2} style={{ width: '500%', height: 'auto' }}/>
+                            : turn == 3 ? <img src={charactor3} style={{ width: '500%', height: 'auto' }}/> : <img src={charactor4} style={{ width: '500%', height: 'auto' }}/>}
                 </Grid>
                 <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                     <Box sx={{ fontSize: "64px" }}>
@@ -310,24 +313,32 @@ export const GameComponent = () => {
                     <Box>
                         <Button
                             variant="contained"
-                            color="inherit"
-                            sx={{ fontSize: "25px", position: "relative", width: '200px', height: '100px', top: '0%', right: '0%' }}
+                            color="warning"
+                            sx={{ fontSize: "25px", position: "relative", width: '250px', height: '100px', top: '0%', right: '0%' }}
                             onClick={dice_roll}
                         >
                             サイコロを振る
                         </Button>
                     </Box>
-                    <Grid container justifyContent="center" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <Grid container justifyContent="center" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} style={{ marginTop: '5%' }}>
                         <Box sx={{ fontSize: "64px" }}>出目：</Box>
                         {isBoxVisible && (<Box sx={{ fontSize: "64px" }}>{prevRandomIndex + 1}</Box>)}
                     </Grid>
 
 
-                    <Grid container justifyContent="center" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <Button variant="contained" color="inherit" onClick={back_1step} sx={{ fontSize: "18px", position: "relative", width: '100px', height: '50px', }}>1つ戻る</Button>
-                        <Button variant="contained" color="inherit" onClick={move_1step} sx={{ fontSize: "18px", position: "relative", width: '100px', height: '50px', }}>1つ進む</Button>
+                    <Grid container justifyContent="center" spacing={2} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                        <Grid item sx={{ paddingBottom: 3 }} style={{ marginTop: '5%' ,marginBottom: '2%'}}>
+                        <Button variant="contained" color="inherit" onClick={back_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ戻る</Button>
+                        </Grid>
+                        <Grid item sx={{ paddingBottom: 3 }} style={{ marginTop: '5%' ,marginBottom: '2%'}}>
+                        <Button variant="contained" color="inherit" onClick={move_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ進む</Button>
+                        </Grid>
                     </Grid>
-                    <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "18px", position: "relative", width: '200px', height: '50px', }}>このマスに止まる</Button>
+                    <Grid container justifyContent="center">
+                        <Grid item>
+                            <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "20px", position: "relative", width: '250px', height: '60px', }}>このマスに止まる</Button>
+                        </Grid>
+                    </Grid>
                     <Box sx={{ fontSize: "32px", color: "red" }}>{anounceDiceroll}</Box>
                     {charactoreventflag ? <Box sx={{ fontSize: "32px", color: "red" }}>イベント発生</Box> : <div />}
                     {(charactor1X == 785 && charactor1Y == 560) || (charactor2X == 805 && charactor2Y == 560) || 
@@ -335,6 +346,7 @@ export const GameComponent = () => {
                      <Box sx={{ fontSize: "32px", color: "red" }}>ゴール</Box> : <div />}
                     {turn >= 2 && turn <= 4 ? <Cpu /> : <div />}
                 </Grid>
+                
             </Grid>
         </Box>
     )
