@@ -248,6 +248,8 @@ export const GameComponent = () => {
                         <image href={charactor2} x={charactor2X} y={charactor2Y} width="30" height="30" />
                         <image href={charactor3} x={charactor3X} y={charactor3Y} width="30" height="30" />
                         <image href={charactor4} x={charactor4X} y={charactor4Y} width="30" height="30" />
+                        {turn == 1 ? <image href={charactor1} x="1200" y="20" width="150" height="150"/> : turn == 2 ? <image href={charactor2} x="1200" y="20" width="150" height="150"/>
+                            : turn == 3 ? <image href={charactor3} x="1200" y="20" width="150" height="150"/> : <image href={charactor4} x="1200" y="20" width="150" height="150"/>}
                     </svg>
                 </Grid>
                 <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
@@ -280,6 +282,9 @@ export const GameComponent = () => {
                     <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "18px", position: "relative", width: '200px', height: '50px', }}>このマスに止まる</Button>
                     <Box sx={{ fontSize: "32px", color: "red" }}>{anounceDiceroll}</Box>
                     {charactoreventflag ? <Box sx={{ fontSize: "32px", color: "red" }}>イベント発生</Box> : <div />}
+                    {(charactor1X == 785 && charactor1Y == 560) || (charactor2X == 805 && charactor2Y == 560) || 
+                     (charactor3X == 785 && charactor3Y == 580) || (charactor4X == 805 && charactor4Y == 580) ? 
+                     <Box sx={{ fontSize: "32px", color: "red" }}>ゴール</Box> : <div />}
                 </Grid>
             </Grid>
         </Box>
