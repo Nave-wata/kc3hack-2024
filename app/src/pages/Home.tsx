@@ -3,7 +3,8 @@ import * as React from 'react';
 import '../index.css';
 import { GameComponent } from "../components/Game";
 import Background from '../assets/images/Background/background.png';
-import {Box,
+import {
+    Box,
     Button,
     Grid,
     Modal,
@@ -52,13 +53,7 @@ export const Home = () => {
     const [isFullScreen, setIsFullScreen] = React.useState<boolean>(document.fullscreenElement ? true : false);
     const [open, setOpen] = React.useState(false);
     const handleGameStart = () => {
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-            setIsFullScreen(false);
-        } else {
-            document.documentElement.requestFullscreen();
-            setIsFullScreen(true);
-        }
+        setIsFullScreen(true);
     }
 
     const handleOpen = () => setOpen(true);
