@@ -238,6 +238,54 @@ export const GameComponent = () => {
         setIsBoxVisible(true);
     }, []);
 
+    const Cpu = () => {
+        dice_roll()
+        let cpumove
+        let cpugoal
+        switch (turn) {
+            case 2:
+                cpumove = i2 + diceMaximum
+                if(cpumove < coordinates.length){
+                    for (let i = 0; i < diceMaximum; i++) {
+                        move_1step()
+                    }
+                }else{
+                    cpugoal = cpumove - coordinates.length
+                    for (let i = 0; i < diceMaximum - cpugoal - 1; i++) {
+                        move_1step()
+                    }
+                }
+                break;
+            case 3:
+                cpumove = i3 + diceMaximum
+                if(cpumove < coordinates.length){
+                    for (let i = 0; i < diceMaximum; i++) {
+                        move_1step()
+                    }
+                }else{
+                    cpugoal = cpumove - coordinates.length
+                    for (let i = 0; i < diceMaximum - cpugoal - 1; i++) {
+                        move_1step()
+                    }
+                }
+                break;
+            case 4:
+                cpumove = i4 + diceMaximum
+                if(cpumove < coordinates.length){
+                    for (let i = 0; i < diceMaximum; i++) {
+                        move_1step()
+                    }
+                }else{
+                    cpugoal = cpumove - coordinates.length
+                    for (let i = 0; i < diceMaximum - cpugoal - 1; i++) {
+                        move_1step()
+                    }
+                }
+                break;
+        }
+        return <div />
+    }
+
     return (
         <Box style={containerStyle}>
             <Grid container xs={12} >
@@ -285,6 +333,7 @@ export const GameComponent = () => {
                     {(charactor1X == 785 && charactor1Y == 560) || (charactor2X == 805 && charactor2Y == 560) || 
                      (charactor3X == 785 && charactor3Y == 580) || (charactor4X == 805 && charactor4Y == 580) ? 
                      <Box sx={{ fontSize: "32px", color: "red" }}>ゴール</Box> : <div />}
+                    {turn >= 2 && turn <= 4 ? <Cpu /> : <div />}
                 </Grid>
             </Grid>
         </Box>
