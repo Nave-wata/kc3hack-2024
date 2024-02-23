@@ -10,6 +10,7 @@ import charactor4 from "../../assets/images/Charactor/charactor4.png";
 import { Coordinate } from "./Coordinate";
 import { Box, Button, Grid } from "@mui/material";
 import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6, default_dice } from "../../assets/images/Dice/index";
+import { GameClearComponent } from "./gameClearCompornent";
 
 interface CoordinateType {
     x: number;
@@ -175,6 +176,16 @@ export const GameComponent = () => {
         }
     }
 
+    const isGoal = () => {
+        if ((charactor1X == 785 && charactor1Y == 560) || (charactor2X == 805 && charactor2Y == 560) ||
+            (charactor3X == 785 && charactor3Y == 580) || (charactor4X == 805 && charactor4Y == 580)) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
 
     const dice_roll = () => {
         // サイコロを振った結果に応じて、適切なダイス画像のパスを設定
@@ -245,11 +256,11 @@ export const GameComponent = () => {
         switch (turn) {
             case 2:
                 cpumove = i2 + diceMaximum
-                if(cpumove < coordinates.length){
+                if (cpumove < coordinates.length) {
                     for (let i = 0; i < diceMaximum; i++) {
                         move_1step()
                     }
-                }else{
+                } else {
                     cpugoal = cpumove - coordinates.length
                     for (let i = 0; i < diceMaximum - cpugoal - 1; i++) {
                         move_1step()
@@ -258,11 +269,11 @@ export const GameComponent = () => {
                 break;
             case 3:
                 cpumove = i3 + diceMaximum
-                if(cpumove < coordinates.length){
+                if (cpumove < coordinates.length) {
                     for (let i = 0; i < diceMaximum; i++) {
                         move_1step()
                     }
-                }else{
+                } else {
                     cpugoal = cpumove - coordinates.length
                     for (let i = 0; i < diceMaximum - cpugoal - 1; i++) {
                         move_1step()
@@ -271,11 +282,11 @@ export const GameComponent = () => {
                 break;
             case 4:
                 cpumove = i4 + diceMaximum
-                if(cpumove < coordinates.length){
+                if (cpumove < coordinates.length) {
                     for (let i = 0; i < diceMaximum; i++) {
                         move_1step()
                     }
-                }else{
+                } else {
                     cpugoal = cpumove - coordinates.length
                     for (let i = 0; i < diceMaximum - cpugoal - 1; i++) {
                         move_1step()
@@ -288,6 +299,11 @@ export const GameComponent = () => {
 
     return (
         <Box style={containerStyle}>
+            {isGoal() && (
+                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 9999 }}>
+                    <GameClearComponent />
+                </div>
+            )}
             <Grid container xs={12} >
                 <Grid item>
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1350" height="1200">
@@ -296,8 +312,8 @@ export const GameComponent = () => {
                         <image href={charactor2} x={charactor2X} y={charactor2Y} width="30" height="30" />
                         <image href={charactor3} x={charactor3X} y={charactor3Y} width="30" height="30" />
                         <image href={charactor4} x={charactor4X} y={charactor4Y} width="30" height="30" />
-                        {turn == 1 ? <image href={charactor1} x="1200" y="20" width="150" height="150"/> : turn == 2 ? <image href={charactor2} x="1200" y="20" width="150" height="150"/>
-                            : turn == 3 ? <image href={charactor3} x="1200" y="20" width="150" height="150"/> : <image href={charactor4} x="1200" y="20" width="150" height="150"/>}
+                        {turn == 1 ? <image href={charactor1} x="1200" y="20" width="150" height="150" /> : turn == 2 ? <image href={charactor2} x="1200" y="20" width="150" height="150" />
+                            : turn == 3 ? <image href={charactor3} x="1200" y="20" width="150" height="150" /> : <image href={charactor4} x="1200" y="20" width="150" height="150" />}
                     </svg>
                 </Grid>
                 <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
@@ -330,9 +346,6 @@ export const GameComponent = () => {
                     <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "18px", position: "relative", width: '200px', height: '50px', }}>このマスに止まる</Button>
                     <Box sx={{ fontSize: "32px", color: "red" }}>{anounceDiceroll}</Box>
                     {charactoreventflag ? <Box sx={{ fontSize: "32px", color: "red" }}>イベント発生</Box> : <div />}
-                    {(charactor1X == 785 && charactor1Y == 560) || (charactor2X == 805 && charactor2Y == 560) || 
-                     (charactor3X == 785 && charactor3Y == 580) || (charactor4X == 805 && charactor4Y == 580) ? 
-                     <Box sx={{ fontSize: "32px", color: "red" }}>ゴール</Box> : <div />}
                     {turn >= 2 && turn <= 4 ? <Cpu /> : <div />}
                 </Grid>
             </Grid>
