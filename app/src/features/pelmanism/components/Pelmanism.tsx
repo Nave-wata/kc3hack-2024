@@ -26,7 +26,7 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
   const [timeLeft, setTimeLeft] = React.useState(1);
   const [isClickedBackoButton, setisClickedBackoButton] = React.useState(false);
   const [isTimeFinished, setTimeFinished] = React.useState(false)
-  const [isCardget, setCardget] = React.useState(false)
+
 
 
 
@@ -86,21 +86,19 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
     newIsShows[index] = true;
     setIsShows(newIsShows);
 
+
     if (openItems.length === 0) {
       setOpenItems([item]);
       return;
     }
 
     if (openItems[0].id === item.id) {
+      setScore(score + 1); // スコアを1ふやす
       setOpenItems([]);
       return;
     }
 
     const resetIsShows = newIsShows.map((value, itemIndex) => pelmanismItems[itemIndex].id === openItems[0].id || pelmanismItems[itemIndex].id === item.id ? false : value);
-    if (!resetIsShows) {
-      setCardget(true)
-      setCardget(false)
-    }
     setIsResetting(true);
 
 
@@ -115,12 +113,7 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
     setOpenItems([]);
   };
 
-  useEffect(() => {
-    if (!isCardget) {
-      setScore(score + 1)
-    }
-    return
-  }, [isCardget]);
+
 
 
   useEffect(() => {
@@ -150,7 +143,7 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
                   key={index}
                   style={{ backgroundColor: "blue", color: "white", position: "relative", width: "120px", height: "240px", margin: "1rem" }}
                   className="pelmanism-button"
-                  onClick={() => handleButtonClick(item, index)}
+                  onClick={() => { handleButtonClick(item, index); }}
                 >
                   {isShows[index] ? item.text : <img src={CardImage} style={{
                     position: "absolute",
