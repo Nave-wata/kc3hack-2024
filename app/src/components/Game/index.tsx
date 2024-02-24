@@ -10,6 +10,11 @@ import { Coordinate } from "./Coordinate";
 import { Box, Button, Grid } from "@mui/material";
 import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6, default_dice } from "../../assets/images/Dice/index";
 import { GameClearComponent } from "./gameClearCompornent";
+import { BokeEvaluation } from "../../features/boke_evaluation";
+import { Bokes } from "../../features/bokes";
+import { Pelmanism } from "../../features/pelmanism";
+import { Quizzes } from "../../features/quizzes";
+
 
 interface CoordinateType {
     x: number;
@@ -34,6 +39,7 @@ export const GameComponent = () => {
     const [anounceDiceroll, setAnounce] = useState("");// 「サイコロをふってください」のテキストを格納するステート
     const [diceMaximum, setdiceMaximum] = useState(0);//出目の最大値を設定
     const [diceMinimum, setdiceMinimum] = useState(0);//出目の最小値を設定
+    const [Minigame, setMinigame] = React.useState<number>(-1);//ミニゲームの種類を設定
 
     const containerStyle: React.CSSProperties = {
         margin: 0,
@@ -62,7 +68,6 @@ export const GameComponent = () => {
 
     const [charactor1X, setCharactor1X] = useState<number | undefined>(745);
     const [charactor1Y, setCharactor1Y] = useState<number | undefined>(540);
-    const [charactoreventflag, setCharactoreventflag] = useState<boolean | undefined>(false); //プレイヤーのイベントフラグ
     const [charactor2X, setCharactor2X] = useState<number | undefined>(765);
     const [charactor2Y, setCharactor2Y] = useState<number | undefined>(540);
     const [charactor3X, setCharactor3X] = useState<number | undefined>(745);
@@ -162,7 +167,11 @@ export const GameComponent = () => {
 
     const stopMasu = () => {        //止まるマスの決定
         if (isdiceroll) {           //サイコロがふられたか
-            setCharactoreventflag(coordinates[i1].eventflag); //止まるマスにイベントがあるか
+            if (turn == 1){
+                if(coordinates[i1].eventflag){ //止まるマスにイベントがあるか
+                    setMinigame(Math.floor(Math.random() * 4));
+                }
+            }
             setAnounce("")
             if (turn === 4) {
                 turn = 1
@@ -296,6 +305,11 @@ export const GameComponent = () => {
         return <div />
     }
 
+    const Mini_init = () => {
+        setMinigame(-1)
+        return <div />
+    } 
+
     return (
         <Box style={containerStyle}>
             {isGoal() && (
@@ -303,6 +317,17 @@ export const GameComponent = () => {
                     <GameClearComponent />
                 </div>
             )}
+            {(turn == 2 && Minigame == 0) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><BokeEvaluation /></div> :
+             (turn == 2 && Minigame == 1) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Bokes /></div> :
+             (turn == 2 && Minigame == 2) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Pelmanism pairNumber={5} /></div> : 
+             (turn == 2 && Minigame == 3 && (i1 < 3 || i3 > 39)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="大阪" /></div> :
+             (turn == 2 && Minigame == 3 && (i1 < 8)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="和歌山" /></div> :
+             (turn == 2 && Minigame == 3 && (i1 < 13)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="奈良" /></div> :
+             (turn == 2 && Minigame == 3 && (i1 < 20)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="三重" /></div> :
+             (turn == 2 && Minigame == 3 && (i1 < 25)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="滋賀" /></div> :
+             (turn == 2 && Minigame == 3 && (i1 < 30)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="京都" /></div> :
+             (turn == 2 && Minigame == 3 && (i1 < 40)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="兵庫" /></div> : <div />}
+            {(turn == 3 && Minigame >= 0) ? <Mini_init /> : <div />}
             <Grid container xs={12} >
                 <Grid item>
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1350" height="1200">
@@ -311,8 +336,6 @@ export const GameComponent = () => {
                         <image href={charactor2} x={charactor2X} y={charactor2Y} width="30" height="30" />
                         <image href={charactor3} x={charactor3X} y={charactor3Y} width="30" height="30" />
                         <image href={charactor4} x={charactor4X} y={charactor4Y} width="30" height="30" />
-                        {turn === 1 ? <image href={charactor1} x="1200" y="20" width="150" height="150" /> : turn === 2 ? <image href={charactor2} x="1200" y="20" width="150" height="150" />
-                            : turn === 3 ? <image href={charactor3} x="1200" y="20" width="150" height="150" /> : <image href={charactor4} x="1200" y="20" width="150" height="150" />}
                     </svg>
                 </Grid>
                 <Grid item style={{ position: 'relative', top: '100px', left: '500px' }}>
@@ -356,7 +379,6 @@ export const GameComponent = () => {
                         </Grid>
                     </Grid>
                     {turn == 1 ? <Box sx={{ fontSize: "32px", color: "red" }}>{anounceDiceroll}</Box> : <div />}
-                    {charactoreventflag ? <Box sx={{ fontSize: "32px", color: "red" }}>イベント発生</Box> : <div />}
                     {turn >= 2 && turn <= 4 ? <div><Cpu /> <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "20px", position: "relative", width: '250px', height: '60px', }}>{turn}Pは{prevRandomIndex + 1}動きました</Button></div> : <div />}
                 </Grid>
 
