@@ -109,7 +109,7 @@ export const Home = () => {
 
     return (
         <MainLayout title={"関西双六 - " + isFullScreen ? "ようこそ！" : "ゲーム"} head={head()}>
-            {isFullScreen ? <Quizzes prefecture="大阪" /> : HomeComponent()}
+            {isFullScreen ? <GameComponent /> : HomeComponent()}
         </MainLayout>
     )
 }
