@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { usePelmanism } from "../api/getPelmanism";
 import { is_set } from "../../../utils/isType";
 import { PelmanismItem, PelmanismResponse } from "../types";
@@ -19,8 +19,30 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
   const pelmanismQuery = usePelmanism();
   const [open, setOpen] = React.useState(false);
   const [isGameFinished, setGameFinished] = React.useState(false);
+  const [isGameStarted, setGameStarted] = React.useState(false);
+  const [score, setScore] = React.useState(0);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [timeLeft, setTimeLeft] = React.useState(1);
+
+  useEffect(() => {
+    if (isGameStarted) {
+      setTimeLeft(10); // 初期化
+    }
+  }, [isGameStarted]); // ゲーム開始時にtimeLeftを10に初期化
+
+  useEffect(() => {
+    if (isGameStarted && timeLeft > 0) { // ゲームが開始され、timeLeftが0より大きい場合にのみカウントダウン処理を実行
+      const interval = setInterval(() => {
+        setTimeLeft(prevTime => prevTime - 1); // timeLeftを1秒減らす
+      }, 1000);
+
+      return () => clearInterval(interval); // アンマウント時にintervalをクリア
+
+    } else if (timeLeft === 0) {
+      setGameFinished(true); // 時間切れでゲームを終了
+    }
+  }, [isGameStarted, timeLeft]);
 
 
 
@@ -125,11 +147,21 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
               <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}><br /><br /></Grid>
               <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}>スコア</Grid>
               <Grid item xs={12}>
-                <Box sx={{ display: "flex", textAlign: "center", height: "100%" }}>1</Box>
+                <Box sx={{ display: "flex", textAlign: "center", height: "100%" }}>{score}</Box>
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12}>
+          {!isGameStarted && (
+            <Grid item marginLeft="-1.5rem" xs={12}>
+              <Button variant="contained" onClick={() => setGameStarted(true)}>神経衰弱スタート</Button>
+            </Grid>
+          )}{isGameStarted && (
+            <Grid item xs={12}>
+              <Typography variant="h5" align="center">
+                制限時間: {timeLeft}
+              </Typography>
+            </Grid>)}
+          <Grid item marginLeft="4rem" xs={12}>
             <Button variant="contained" onClick={handleOpen}>ルール説明</Button>
             <Modal
               open={open}
@@ -161,8 +193,8 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
               </Box>
             </Modal>
           </Grid>
-          <Grid item xs={12}>
-            <Button onClick={() => setGameFinished(true)}>すごろくに戻る</Button>
+          <Grid marginLeft="3.0rem" item xs={12}>
+            <Button variant="contained" onClick={() => setGameFinished(true)}>すごろくに戻る</Button>
           </Grid>
         </Grid>
       </Grid>
