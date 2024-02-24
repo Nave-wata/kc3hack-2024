@@ -9,7 +9,7 @@ import {
     Grid,
     Modal,
     Typography
-}from "@mui/material";
+} from "@mui/material";
 
 const head = () => {
     return (
@@ -62,16 +62,16 @@ export const Home = () => {
 
     const HomeComponent = () => (
         <Box sx={image}>
-            <Box sx={{ minHeight: '100vh', minWidth: '100vw', justifyContent: "space-between"}}>
+            <Box sx={{ minHeight: '100vh', minWidth: '100vw', justifyContent: "space-between" }}>
                 <Grid container direction="column" alignItems="center" spacing={2}>
-                    <Grid item xs = {12} style={{marginTop:'30%'}}>
+                    <Grid item xs={12} style={{ marginTop: '30%' }}>
                         <Button variant="contained" color="success" size="large" onClick={() => handleGameStart()}>ゲームスタート</Button>
                     </Grid>
-                    <Grid item xs = {12}>
+                    <Grid item xs={12}>
                         <Button variant="contained" color='inherit' size="large" onClick={handleOpen}>ルール</Button>
                     </Grid>
                 </Grid>
-            </Box>  
+            </Box>
             <Modal
                 open={open}
                 onClose={handleClose}
