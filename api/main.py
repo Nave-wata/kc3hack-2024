@@ -8,7 +8,10 @@ import os
 load_dotenv()
 
 # アプリケーションインスタンスを生成
-app = FastAPI()
+if os.getenv("APP_ENV") != "production":
+    app = FastAPI()
+else:
+    app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 
 # ルーティングの読み込み
 app.include_router(router)
