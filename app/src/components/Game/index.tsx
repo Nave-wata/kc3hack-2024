@@ -344,20 +344,20 @@ export const GameComponent = () => {
 
                     <Grid container justifyContent="center" spacing={2} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <Grid item sx={{ paddingBottom: 3 }} style={{ marginTop: '5%', marginBottom: '2%' }}>
-                            <Button variant="contained" color="inherit" onClick={back_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ戻る</Button>
+                            {turn == 1 ? <Button variant="contained" color="inherit" onClick={back_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ戻る</Button> : <div />}
                         </Grid>
                         <Grid item sx={{ paddingBottom: 3 }} style={{ marginTop: '5%', marginBottom: '2%' }}>
-                            <Button variant="contained" color="inherit" onClick={move_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ進む</Button>
+                            {turn == 1 ? <Button variant="contained" color="inherit" onClick={move_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ進む</Button> : <div />}
                         </Grid>
                     </Grid>
                     <Grid container justifyContent="center">
                         <Grid item>
-                            <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "20px", position: "relative", width: '250px', height: '60px', }}>このマスに止まる</Button>
+                            {turn == 1 ? <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "20px", position: "relative", width: '250px', height: '60px', }}>このマスに止まる</Button> : <div />}
                         </Grid>
                     </Grid>
-                    <Box sx={{ fontSize: "32px", color: "red" }}>{anounceDiceroll}</Box>
+                    {turn == 1 ? <Box sx={{ fontSize: "32px", color: "red" }}>{anounceDiceroll}</Box> : <div />}
                     {charactoreventflag ? <Box sx={{ fontSize: "32px", color: "red" }}>イベント発生</Box> : <div />}
-                    {turn >= 2 && turn <= 4 ? <Cpu /> : <div />}
+                    {turn >= 2 && turn <= 4 ? <div><Cpu /> <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "20px", position: "relative", width: '250px', height: '60px', }}>{turn}Pは{prevRandomIndex + 1}動きました</Button></div> : <div />}
                 </Grid>
 
             </Grid>
