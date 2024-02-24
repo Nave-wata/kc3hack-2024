@@ -10,6 +10,7 @@ import {
     Modal,
     Typography
 } from "@mui/material";
+import { Pelmanism } from "../features/pelmanism";
 
 const head = () => {
     return (
