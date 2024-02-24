@@ -10,6 +10,11 @@ import charactor4 from "../../assets/images/Charactor/charactor4.png";
 import { Coordinate } from "./Coordinate";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6, default_dice } from "../../assets/images/Dice/index";
+import { BokeEvaluation } from "../../features/boke_evaluation";
+import { Bokes } from "../../features/bokes";
+import { Pelmanism } from "../../features/pelmanism";
+import { Quizzes } from "../../features/quizzes";
+
 
 interface CoordinateType {
     x: number;
@@ -34,6 +39,7 @@ export const GameComponent = () => {
     const [anounceDiceroll, setAnounce] = useState("");// 「サイコロをふってください」のテキストを格納するステート
     const [diceMaximum, setdiceMaximum] = useState(0);//出目の最大値を設定
     const [diceMinimum, setdiceMinimum] = useState(0);//出目の最小値を設定
+    const [Minigame, setMinigame] = React.useState<number>(-1);//ミニゲームの種類を設定
 
     const containerStyle: React.CSSProperties = {
         margin: 0,
@@ -62,7 +68,6 @@ export const GameComponent = () => {
 
     const [charactor1X, setCharactor1X] = useState<number | undefined>(745);
     const [charactor1Y, setCharactor1Y] = useState<number | undefined>(540);
-    const [charactoreventflag, setCharactoreventflag] = useState<boolean | undefined>(false); //プレイヤーのイベントフラグ
     const [charactor2X, setCharactor2X] = useState<number | undefined>(765);
     const [charactor2Y, setCharactor2Y] = useState<number | undefined>(540);
     const [charactor3X, setCharactor3X] = useState<number | undefined>(745);
@@ -162,7 +167,11 @@ export const GameComponent = () => {
 
     const stopMasu = () => {        //止まるマスの決定
         if (isdiceroll) {           //サイコロがふられたか
-            setCharactoreventflag(coordinates[i1].eventflag); //止まるマスにイベントがあるか
+            if (turn == 1){
+                if(coordinates[i1].eventflag){ //止まるマスにイベントがあるか
+                    setMinigame(Math.floor(Math.random() * 4));
+                }
+            }
             setAnounce("")
             if (turn == 4) {
                 turn = 1
@@ -286,8 +295,23 @@ export const GameComponent = () => {
         return <div />
     }
 
+    const Mini_init = () => {
+        setMinigame(-1)
+        return <div />
+    } 
+
     return (
         <Box style={containerStyle}>
+            {(turn == 2 && Minigame == 0) ? <BokeEvaluation /> : (turn == 2 && Minigame == 1) ? <Bokes /> : 
+             (turn == 2 && Minigame == 2) ? <Pelmanism pairNumber={5} /> : 
+             (turn == 2 && Minigame == 3 && (i1 < 3 || i3 > 39)) ?<Quizzes prefecture="大阪" /> :
+             (turn == 2 && Minigame == 3 && (i1 < 8)) ?<Quizzes prefecture="和歌山" /> :
+             (turn == 2 && Minigame == 3 && (i1 < 13)) ?<Quizzes prefecture="奈良" /> :
+             (turn == 2 && Minigame == 3 && (i1 < 20)) ?<Quizzes prefecture="三重" /> :
+             (turn == 2 && Minigame == 3 && (i1 < 25)) ?<Quizzes prefecture="滋賀" /> :
+             (turn == 2 && Minigame == 3 && (i1 < 30)) ?<Quizzes prefecture="京都" /> :
+             (turn == 2 && Minigame == 3 && (i1 < 40)) ?<Quizzes prefecture="兵庫" /> : <div />}
+            {(turn == 3 && Minigame >= 0) ? <Mini_init /> : <div />}
             <Grid container xs={12} >
                 <Grid item>
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1350" height="1200">
@@ -340,7 +364,6 @@ export const GameComponent = () => {
                         </Grid>
                     </Grid>
                     <Box sx={{ fontSize: "32px", color: "red" }}>{anounceDiceroll}</Box>
-                    {charactoreventflag ? <Box sx={{ fontSize: "32px", color: "red" }}>イベント発生</Box> : <div />}
                     {(charactor1X == 785 && charactor1Y == 560) || (charactor2X == 805 && charactor2Y == 560) || 
                      (charactor3X == 785 && charactor3Y == 580) || (charactor4X == 805 && charactor4Y == 580) ? 
                      <Box sx={{ fontSize: "32px", color: "red" }}>ゴール</Box> : <div />}
