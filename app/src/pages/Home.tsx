@@ -106,7 +106,7 @@ export const Home = () => {
     );
 
     return (
-        <MainLayout title={"関西双六 - " + isFullScreen ? "ようこそ！" : "ゲーム"} head={head()}>
+        <MainLayout title={"関西双六 - " + (isFullScreen ? "ゲーム" : "ようこそ！")} head={head()}>
             {isFullScreen ? <GameComponent /> : HomeComponent()}
         </MainLayout>
     )
