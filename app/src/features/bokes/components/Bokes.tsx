@@ -6,7 +6,6 @@ import { Box, Button, Grid, Modal, Typography } from "@mui/material";
 import { GameComponent } from "../../../components/Game";
 import nandeyanen from "../../../assets/images/nandeyanen.png";
 import nanmosen from "../../../assets/images/nanmosen.png";
-import bokebotlogo from "../../../assets/images/Logo/bokebotlogo.png";
 
 export function Bokes() {
   const bokesQuery = useBokes();
@@ -36,11 +35,10 @@ function BokeComponent(boke: Boke) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [timeLeft, setTimeLeft] = React.useState(1);
-  const [BokeQuestion, setBokeQuestion] = React.useState(false);
 
   useEffect(() => {
     if (isGameStarted) {
-      setTimeLeft(10); // 初期化
+      setTimeLeft(3); // 初期化
     }
   }, [isGameStarted]); // ゲーム開始時にtimeLeftを10に初期化
 
@@ -88,16 +86,17 @@ function BokeComponent(boke: Boke) {
   }
 
   const BokeButtonClick = () => {
-    alert(boke.boke ? "正解！" : "不正解...")
-    BokeScore();
-    
+    if(score === 0) {
+      alert(boke.boke ? "正解！" : "不正解...")
+      BokeScore();
+    }
   }
 
   const returnGame = () => {
-    return <div><GameComponent /></div>
+    return <div>スコア_{score}_です<GameComponent /></div>
   }
-  
-  return (
+  if (!isGameFinished) {
+    return ( 
     <Box style={{ backgroundColor: "purple", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       {isGameFinished && returnGame()}
       <Grid container >
@@ -196,14 +195,8 @@ function BokeComponent(boke: Boke) {
         </Grid>
       </Grid>
     </Box >
-
-  );
-}
-
-function BokeGame() {
-  return (
-    <div>
-      <GameComponent />
-    </div>
-  )
+    )
+  }else {
+    return <GameComponent score={score} />
+  }
 }
