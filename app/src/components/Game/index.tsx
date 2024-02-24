@@ -317,15 +317,16 @@ export const GameComponent = () => {
                     <GameClearComponent />
                 </div>
             )}
-            {(turn == 2 && Minigame == 0) ? <BokeEvaluation /> : (turn == 2 && Minigame == 1) ? <Bokes /> : 
-             (turn == 2 && Minigame == 2) ? <Pelmanism pairNumber={5} /> : 
-             (turn == 2 && Minigame == 3 && (i1 < 3 || i3 > 39)) ? <Quizzes prefecture="大阪" /> :
-             (turn == 2 && Minigame == 3 && (i1 < 8)) ? <Quizzes prefecture="和歌山" /> :
-             (turn == 2 && Minigame == 3 && (i1 < 13)) ? <Quizzes prefecture="奈良" /> :
-             (turn == 2 && Minigame == 3 && (i1 < 20)) ? <Quizzes prefecture="三重" /> :
-             (turn == 2 && Minigame == 3 && (i1 < 25)) ? <Quizzes prefecture="滋賀" /> :
-             (turn == 2 && Minigame == 3 && (i1 < 30)) ? <Quizzes prefecture="京都" /> :
-             (turn == 2 && Minigame == 3 && (i1 < 40)) ? <Quizzes prefecture="兵庫" /> : <div />}
+            {(turn == 2 && Minigame == 0) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><BokeEvaluation /></div> :
+             (turn == 2 && Minigame == 1) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Bokes /></div> :
+             (turn == 2 && Minigame == 2) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Pelmanism pairNumber={5} /></div> : 
+             (turn == 2 && Minigame == 3 && (i1 < 3 || i3 > 39)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="大阪" /></div> :
+             (turn == 2 && Minigame == 3 && (i1 < 8)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="和歌山" /></div> :
+             (turn == 2 && Minigame == 3 && (i1 < 13)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="奈良" /></div> :
+             (turn == 2 && Minigame == 3 && (i1 < 20)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="三重" /></div> :
+             (turn == 2 && Minigame == 3 && (i1 < 25)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="滋賀" /></div> :
+             (turn == 2 && Minigame == 3 && (i1 < 30)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="京都" /></div> :
+             (turn == 2 && Minigame == 3 && (i1 < 40)) ? <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}><Quizzes prefecture="兵庫" /></div> : <div />}
             {(turn == 3 && Minigame >= 0) ? <Mini_init /> : <div />}
             <Grid container xs={12} >
                 <Grid item>
