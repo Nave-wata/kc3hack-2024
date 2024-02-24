@@ -319,13 +319,13 @@ export const GameComponent = () => {
             )}
             {(turn == 2 && Minigame == 0) ? <BokeEvaluation /> : (turn == 2 && Minigame == 1) ? <Bokes /> : 
              (turn == 2 && Minigame == 2) ? <Pelmanism pairNumber={5} /> : 
-             (turn == 2 && Minigame == 3 && (i1 < 3 || i3 > 39)) ?<Quizzes prefecture="大阪" /> :
-             (turn == 2 && Minigame == 3 && (i1 < 8)) ?<Quizzes prefecture="和歌山" /> :
-             (turn == 2 && Minigame == 3 && (i1 < 13)) ?<Quizzes prefecture="奈良" /> :
-             (turn == 2 && Minigame == 3 && (i1 < 20)) ?<Quizzes prefecture="三重" /> :
-             (turn == 2 && Minigame == 3 && (i1 < 25)) ?<Quizzes prefecture="滋賀" /> :
-             (turn == 2 && Minigame == 3 && (i1 < 30)) ?<Quizzes prefecture="京都" /> :
-             (turn == 2 && Minigame == 3 && (i1 < 40)) ?<Quizzes prefecture="兵庫" /> : <div />}
+             (turn == 2 && Minigame == 3 && (i1 < 3 || i3 > 39)) ? <Quizzes prefecture="大阪" /> :
+             (turn == 2 && Minigame == 3 && (i1 < 8)) ? <Quizzes prefecture="和歌山" /> :
+             (turn == 2 && Minigame == 3 && (i1 < 13)) ? <Quizzes prefecture="奈良" /> :
+             (turn == 2 && Minigame == 3 && (i1 < 20)) ? <Quizzes prefecture="三重" /> :
+             (turn == 2 && Minigame == 3 && (i1 < 25)) ? <Quizzes prefecture="滋賀" /> :
+             (turn == 2 && Minigame == 3 && (i1 < 30)) ? <Quizzes prefecture="京都" /> :
+             (turn == 2 && Minigame == 3 && (i1 < 40)) ? <Quizzes prefecture="兵庫" /> : <div />}
             {(turn == 3 && Minigame >= 0) ? <Mini_init /> : <div />}
             <Grid container xs={12} >
                 <Grid item>
@@ -366,22 +366,19 @@ export const GameComponent = () => {
 
                     <Grid container justifyContent="center" spacing={2} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <Grid item sx={{ paddingBottom: 3 }} style={{ marginTop: '5%', marginBottom: '2%' }}>
-                            <Button variant="contained" color="inherit" onClick={back_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ戻る</Button>
+                            {turn == 1 ? <Button variant="contained" color="inherit" onClick={back_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ戻る</Button> : <div />}
                         </Grid>
                         <Grid item sx={{ paddingBottom: 3 }} style={{ marginTop: '5%', marginBottom: '2%' }}>
-                            <Button variant="contained" color="inherit" onClick={move_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ進む</Button>
+                            {turn == 1 ? <Button variant="contained" color="inherit" onClick={move_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ進む</Button> : <div />}
                         </Grid>
                     </Grid>
                     <Grid container justifyContent="center">
                         <Grid item>
-                            <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "20px", position: "relative", width: '250px', height: '60px', }}>このマスに止まる</Button>
+                            {turn == 1 ? <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "20px", position: "relative", width: '250px', height: '60px', }}>このマスに止まる</Button> : <div />}
                         </Grid>
                     </Grid>
-                    <Box sx={{ fontSize: "32px", color: "red" }}>{anounceDiceroll}</Box>
-                    {(charactor1X == 785 && charactor1Y == 560) || (charactor2X == 805 && charactor2Y == 560) || 
-                     (charactor3X == 785 && charactor3Y == 580) || (charactor4X == 805 && charactor4Y == 580) ? 
-                     <Box sx={{ fontSize: "32px", color: "red" }}>ゴール</Box> : <div />}
-                    {turn >= 2 && turn <= 4 ? <Cpu /> : <div />}
+                    {turn == 1 ? <Box sx={{ fontSize: "32px", color: "red" }}>{anounceDiceroll}</Box> : <div />}
+                    {turn >= 2 && turn <= 4 ? <div><Cpu /> <Button variant="contained" color="inherit" onClick={stopMasu} sx={{ fontSize: "20px", position: "relative", width: '250px', height: '60px', }}>{turn}Pは{prevRandomIndex + 1}動きました</Button></div> : <div />}
                 </Grid>
 
             </Grid>
