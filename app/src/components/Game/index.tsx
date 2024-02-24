@@ -66,15 +66,15 @@ export const GameComponent = () => {
             });
     }
 
-    const [charactor1X, setCharactor1X] = useState<number | undefined>(745);
-    const [charactor1Y, setCharactor1Y] = useState<number | undefined>(540);
-    const [charactor2X, setCharactor2X] = useState<number | undefined>(765);
-    const [charactor2Y, setCharactor2Y] = useState<number | undefined>(540);
-    const [charactor3X, setCharactor3X] = useState<number | undefined>(745);
-    const [charactor3Y, setCharactor3Y] = useState<number | undefined>(560);
-    const [charactor4X, setCharactor4X] = useState<number | undefined>(765);
-    const [charactor4Y, setCharactor4Y] = useState<number | undefined>(560);
     const coordinates: CoordinateType[] = Coordinate();
+    const [charactor1X, setCharactor1X] = useState<number | undefined>(coordinates[i1].x - 20);
+    const [charactor1Y, setCharactor1Y] = useState<number | undefined>(coordinates[i1].y - 20);
+    const [charactor2X, setCharactor2X] = useState<number | undefined>(coordinates[i2].x);
+    const [charactor2Y, setCharactor2Y] = useState<number | undefined>(coordinates[i2].y - 20);
+    const [charactor3X, setCharactor3X] = useState<number | undefined>(coordinates[i3].x - 20);
+    const [charactor3Y, setCharactor3Y] = useState<number | undefined>(coordinates[i3].y);
+    const [charactor4X, setCharactor4X] = useState<number | undefined>(coordinates[i4].x);
+    const [charactor4Y, setCharactor4Y] = useState<number | undefined>(coordinates[i4].y);
 
 
     const move_1step = () => {              //1マス進む
