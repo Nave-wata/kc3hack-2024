@@ -24,10 +24,16 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [timeLeft, setTimeLeft] = React.useState(1);
+  const [isClickedBackoButton, setisClickedBackoButton] = React.useState(false);
+  const [isTimeFinished, setTimeFinished] = React.useState(false)
+  const [isCardget, setCardget] = React.useState(false)
+
+
+
 
   useEffect(() => {
     if (isGameStarted) {
-      setTimeLeft(10); // 初期化
+      setTimeLeft(30); // 初期化
     }
   }, [isGameStarted]); // ゲーム開始時にtimeLeftを10に初期化
 
@@ -40,7 +46,7 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
       return () => clearInterval(interval); // アンマウント時にintervalをクリア
 
     } else if (timeLeft === 0) {
-      setGameFinished(true); // 時間切れでゲームを終了
+      setTimeFinished(true)
     }
   }, [isGameStarted, timeLeft]);
 
@@ -74,6 +80,8 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
       return;
     }
 
+
+
     const newIsShows = [...isShows];
     newIsShows[index] = true;
     setIsShows(newIsShows);
@@ -89,7 +97,15 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
     }
 
     const resetIsShows = newIsShows.map((value, itemIndex) => pelmanismItems[itemIndex].id === openItems[0].id || pelmanismItems[itemIndex].id === item.id ? false : value);
+    if (!resetIsShows) {
+      setCardget(true)
+      setCardget(false)
+    }
     setIsResetting(true);
+
+
+
+
 
     setTimeout(() => {
       setIsShows(resetIsShows)
@@ -99,10 +115,21 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
     setOpenItems([]);
   };
 
-  const returnGame = () => {
+  useEffect(() => {
+    if (!isCardget) {
+      setScore(score + 1)
+    }
+    return
+  }, [isCardget]);
 
-    return <div><GameComponent /></div>
-  }
+
+  useEffect(() => {
+    if (isGameFinished) {
+      setisClickedBackoButton(true)
+    }
+    return
+  }, [isGameFinished]);
+
 
   if (pelmanismQuery.isLoading) {
     return <div>Loading...</div>;
@@ -112,93 +139,95 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
     return <div>No pelmanism found</div>;
   }
 
-  return (
-    <Box style={{ backgroundColor: "purple", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      {isGameFinished && returnGame()}
-      <Grid container >
-        <Grid item xs={8}>
-          <Box style={{ display: "flex", flexWrap: "wrap", width: "800px", height: "400px", marginBottom: "20rem" }}>
-            {pelmanismItems.map((item, index) => (
-              <button
-                key={index}
-                style={{ backgroundColor: "blue", color: "white", position: "relative", width: "120px", height: "240px", margin: "1rem" }}
-                className="pelmanism-button"
-                onClick={() => handleButtonClick(item, index)}
-              >
-                {isShows[index] ? item.text : <img src={CardImage} style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  width: "100%",
-                  height: "100%"
-                }} alt="Card" />} {/* alt属性を追加 */}
-              </button>
-            ))}
-          </Box>
-        </Grid>
-        <Grid item xs={1}>
-          <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
-            <div style={{ width: "2px", backgroundColor: "black", height: "100%", margin: "auto" }} />
-          </div>        </Grid>
-        <Grid container item xs={3}>
-          <Grid item xs={12}>
-            <Grid container direction="column" alignItems="center" marginLeft="-1.5rem">
-              <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}><br /><br /></Grid>
-              <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}>スコア</Grid>
-              <Grid item xs={12}>
-                <Box sx={{ display: "flex", textAlign: "center", height: "100%" }}>{score}</Box>
+  if (!isClickedBackoButton) {
+    return (
+      <Box style={{ backgroundColor: "purple", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+        <Grid container >
+          <Grid item xs={8}>
+            <Box style={{ display: "flex", flexWrap: "wrap", width: "800px", height: "400px", marginBottom: "20rem" }}>
+              {!isTimeFinished && pelmanismItems.map((item, index) => (
+                <button
+                  key={index}
+                  style={{ backgroundColor: "blue", color: "white", position: "relative", width: "120px", height: "240px", margin: "1rem" }}
+                  className="pelmanism-button"
+                  onClick={() => handleButtonClick(item, index)}
+                >
+                  {isShows[index] ? item.text : <img src={CardImage} style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    width: "100%",
+                    height: "100%"
+                  }} alt="Card" />} {/* alt属性を追加 */}
+                </button>
+              ))}
+            </Box>
+          </Grid>
+          <Grid item xs={1}>
+            <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
+              <div style={{ width: "2px", backgroundColor: "black", height: "100%", margin: "auto" }} />
+            </div>        </Grid>
+          <Grid container item xs={3}>
+            <Grid item xs={12}>
+              <Grid container direction="column" alignItems="center" marginLeft="-2.5rem">
+                <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}><br /><br /></Grid>
+                <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}>スコア</Grid>
+                <Grid item xs={12}>
+                  <Box sx={{ display: "flex", textAlign: "center", height: "100%" }}>{score}</Box>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-          {!isGameStarted && (
-            <Grid item marginLeft="-1.5rem" xs={12}>
-              <Button variant="contained" onClick={() => setGameStarted(true)}>神経衰弱スタート</Button>
-            </Grid>
-          )}{isGameStarted && (
-            <Grid item xs={12}>
-              <Typography variant="h5" align="center">
-                制限時間: {timeLeft}
-              </Typography>
-            </Grid>)}
-          <Grid item marginLeft="4rem" xs={12}>
-            <Button variant="contained" onClick={handleOpen}>ルール説明</Button>
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" align="center" variant="h4" component="h2">
-                  ⚁ルール⚂
+            {!isGameStarted && (
+              <Grid item marginLeft="3rem" xs={12}>
+                <Button variant="contained" onClick={() => setGameStarted(true)}>神経衰弱スタート</Button>
+              </Grid>
+            )}{isGameStarted && (
+              <Grid item marginLeft="-2.5rem" xs={12}>
+                <Typography variant="h5" align="center">
+                  制限時間: {timeLeft}
                 </Typography>
-                <Typography id="modal-modal-description" align="center" sx={{ mt: 2 }}>
-                  <b>関西の観光地をすごろくでまわろう‼‼</b><br />
-                </Typography>
-                <Typography id="modal-modal-description" >
-                  <br />
-                  ・対戦人数は1～4人<br />
-                  ・先頭のプレイヤーがゴールに到達するとゲーム終了<br />
-                  ・イベントマスに止まるとミニゲームスタート！<br />
-                  ・ミニゲームで勝利するとポイントゲット！<br />
-                  ・勝敗はポイントが一番多い人が勝利<br />
-                  <br />
+              </Grid>)}
+            <Grid item marginLeft="4rem" xs={12}>
+              <Button variant="contained" onClick={handleOpen}>ルール説明</Button>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography id="modal-modal-title" align="center" variant="h4" component="h2">
+                    ⚁ルール⚂
+                  </Typography>
+                  <Typography id="modal-modal-description" align="center" sx={{ mt: 2 }}>
+                    <b>関西の観光地をすごろくでまわろう‼‼</b><br />
+                  </Typography>
+                  <Typography id="modal-modal-description" >
+                    <br />
+                    ・対戦人数は1～4人<br />
+                    ・先頭のプレイヤーがゴールに到達するとゲーム終了<br />
+                    ・イベントマスに止まるとミニゲームスタート！<br />
+                    ・ミニゲームで勝利するとポイントゲット！<br />
+                    ・勝敗はポイントが一番多い人が勝利<br />
+                    <br />
 
-                  <strong>ミニゲームでたくさん勝利してポイントを稼ごう‼‼‼<br /></strong>
-                </Typography>
-                <Box sx={{ textAlign: "right", }}>
-                  <Button variant="contained" onClick={handleClose}>閉じる</Button>
+                    <strong>ミニゲームでたくさん勝利してポイントを稼ごう‼‼‼<br /></strong>
+                  </Typography>
+                  <Box sx={{ textAlign: "right", }}>
+                    <Button variant="contained" onClick={handleClose}>閉じる</Button>
+                  </Box>
                 </Box>
-              </Box>
-            </Modal>
-          </Grid>
-          <Grid marginLeft="3.0rem" item xs={12}>
-            <Button variant="contained" onClick={() => setGameFinished(true)}>すごろくに戻る</Button>
+              </Modal>
+            </Grid>
+            <Grid marginLeft="3.0rem" item xs={12}>
+              <Button variant="contained" onClick={() => setGameFinished(true)}>すごろくに戻る</Button>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Box >
-
-  );
+      </Box >
+    );
+  } else {
+    return <GameComponent />;
+  }
 }
