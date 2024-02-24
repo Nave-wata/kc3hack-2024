@@ -14,13 +14,13 @@ export function Games() {
               <Button variant="contained" color="primary" size="large" href={"/games/nandeyanen"}>なんでやねん Bot</Button>
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained" color="primary" size="large" href={"/games/boke"}>ボケ Bot</Button>
+              <Button variant="contained" color="primary" size="large" href={"/games/bokes"}>ボケ Bot</Button>
             </Grid>
             <Grid item xs={12}>
               <Button variant="contained" color="primary" size="large" href={"/games/pelmanism"}>神経衰弱</Button>
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained" color="primary" size="large" href={"/games/quiz"}>クイズ</Button>
+              <Button variant="contained" color="primary" size="large" href={"/games/quizzes"}>クイズ</Button>
             </Grid>
             <Grid item xs={12}>
               <Button variant="contained" color="inherit" size="large" href={"/"}>タイトルに戻る</Button>
