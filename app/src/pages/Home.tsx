@@ -10,6 +10,7 @@ import {
     Modal,
     Typography
 } from "@mui/material";
+import { Pelmanism } from "../features/pelmanism";
 
 const head = () => {
     return (
@@ -106,7 +107,7 @@ export const Home = () => {
 
     return (
         <MainLayout title={"関西双六 - " + isFullScreen ? "ようこそ！" : "ゲーム"} head={head()}>
-            {isFullScreen ? <GameComponent /> : HomeComponent()}
+            {isFullScreen ? <Pelmanism pairNumber={5} /> : HomeComponent()}
         </MainLayout>
     )
 }

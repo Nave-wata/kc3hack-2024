@@ -1,0 +1,23 @@
+@media (max-width: 576px) {
+    .pelmanism-container {
+      width: 100%;
+    }
+  
+    .pelmanism-button {
+      width: 50%;
+      height: auto;
+      margin: 0.5rem;
+    }
+  }
+  
+  @media (min-width: 576px) {
+    .pelmanism-container {
+      width: 576px;
+    }
+  
+    .pelmanism-button {
+      width: 120px;
+      height: 240px;
+      margin: 1rem;
+    }
+  }
