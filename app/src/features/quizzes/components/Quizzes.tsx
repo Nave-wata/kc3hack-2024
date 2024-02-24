@@ -1,9 +1,7 @@
 import React from "react"
 import { useQuizzes } from "../api/getQuizzes";
 import { is_set } from "../../../utils/isType";
-import { Quiz } from "../types";
-
-type Prefecture = "大阪" | "京都" | "兵庫" | "奈良" | "三重" | "滋賀" | "和歌山";
+import { Prefecture, Quiz } from "../types";
 
 export function Quizzes({ prefecture }: { prefecture: Prefecture }) {
   const quizzesQuery = useQuizzes();
