@@ -24,7 +24,7 @@ let i4 = 0;
 
 let turn = 1;
 
-export const GameComponent = () => {
+export const GameComponent = ({ score }: { score?: number }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const screenOrientation = window.screen.orientation;
     const [dicePath, setDicePath] = useState(default_dice); // dicePathとその更新関数をuseStateフックで定義

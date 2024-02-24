@@ -33,7 +33,7 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
 
   useEffect(() => {
     if (isGameStarted) {
-      setTimeLeft(30); // 初期化
+      setTimeLeft(1); // 初期化
     }
   }, [isGameStarted]); // ゲーム開始時にtimeLeftを10に初期化
 
@@ -175,10 +175,16 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
               <Grid item marginLeft="3rem" xs={12}>
                 <Button variant="contained" onClick={() => setGameStarted(true)}>神経衰弱スタート</Button>
               </Grid>
-            )}{isGameStarted && (
+            )}{(isGameStarted && !isTimeFinished) && (
               <Grid item marginLeft="-2.5rem" xs={12}>
                 <Typography variant="h5" align="center">
                   制限時間: {timeLeft}
+                </Typography>
+              </Grid>)}
+            {isTimeFinished && (
+              <Grid item marginLeft="-2.5rem" xs={12}>
+                <Typography variant="h5" align="center">
+                  ゲーム終了<br />スコアは{score}です<br />すごろくに戻るボタンを押してください
                 </Typography>
               </Grid>)}
             <Grid item marginLeft="4rem" xs={12}>
@@ -212,15 +218,15 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
                   </Box>
                 </Box>
               </Modal>
-            </Grid>
-            <Grid marginLeft="3.0rem" item xs={12}>
-              <Button variant="contained" onClick={() => setGameFinished(true)}>すごろくに戻る</Button>
+              <Grid item xs={12}>
+                <Button variant="contained" onClick={() => setGameFinished(true)}>すごろくに戻る</Button>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Box >
     );
   } else {
-    return <GameComponent />;
+    return <GameComponent score={score} />;
   }
 }
