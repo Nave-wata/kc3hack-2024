@@ -7,7 +7,7 @@ export function getBokes() {
 
 export function useBokes() {
   return useQuery({
-    queryKey: ["quizzes"],
+    queryKey: ["boke"],
     queryFn: () => getBokes(),
   });
 }
