@@ -11,6 +11,8 @@ import {
     Typography
 } from "@mui/material";
 import { Pelmanism } from "../features/pelmanism";
+import { Bokes } from "../features/bokes";
+import { Quizzes } from "../features/quizzes";
 
 const head = () => {
     return (
