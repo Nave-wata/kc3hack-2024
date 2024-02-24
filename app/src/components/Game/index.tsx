@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { is_set } from "../../utils/isType";
-import { create } from "domain";
 import Kinki from "../../assets/images/Kinki";
 import charactor1 from "../../assets/images/Charactor/charactor1.png";
 import charactor2 from "../../assets/images/Charactor/charactor2.png";
 import charactor3 from "../../assets/images/Charactor/charactor3.png";
 import charactor4 from "../../assets/images/Charactor/charactor4.png";
 import { Coordinate } from "./Coordinate";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6, default_dice } from "../../assets/images/Dice/index";
 import { GameClearComponent } from "./gameClearCompornent";
 
@@ -165,7 +164,7 @@ export const GameComponent = () => {
         if (isdiceroll) {           //サイコロがふられたか
             setCharactoreventflag(coordinates[i1].eventflag); //止まるマスにイベントがあるか
             setAnounce("")
-            if (turn == 4) {
+            if (turn === 4) {
                 turn = 1
             } else {
                 turn++
@@ -177,8 +176,8 @@ export const GameComponent = () => {
     }
 
     const isGoal = () => {
-        if ((charactor1X == 785 && charactor1Y == 560) || (charactor2X == 805 && charactor2Y == 560) ||
-            (charactor3X == 785 && charactor3Y == 580) || (charactor4X == 805 && charactor4Y == 580)) {
+        if ((charactor1X === 785 && charactor1Y === 560) || (charactor2X === 805 && charactor2Y === 560) ||
+            (charactor3X === 785 && charactor3Y === 580) || (charactor4X === 805 && charactor4Y === 580)) {
             return true
         }
         else {
@@ -201,31 +200,31 @@ export const GameComponent = () => {
             setdiceroll(true)
             setAnounce("")
             //出目の最大を設定↓↓
-            if (turn == 1) {
+            if (turn === 1) {
                 setdiceMaximum(i1 + randomIndex + 1)
             }
-            if (turn == 2) {
+            if (turn === 2) {
                 setdiceMaximum(i2 + randomIndex + 1)
             }
-            if (turn == 3) {
+            if (turn === 3) {
                 setdiceMaximum(i3 + randomIndex + 1)
             }
-            if (turn == 4) {
+            if (turn === 4) {
                 setdiceMaximum(i4 + randomIndex + 1)
             }
             //ここまで
 
             //出目の最小を設定↓↓
-            if (turn == 1) {
+            if (turn === 1) {
                 setdiceMinimum(i1)
             }
-            if (turn == 2) {
+            if (turn === 2) {
                 setdiceMinimum(i2)
             }
-            if (turn == 3) {
+            if (turn === 3) {
                 setdiceMinimum(i3)
             }
-            if (turn == 4) {
+            if (turn === 4) {
                 setdiceMinimum(i4)
             }
             //ここまで
@@ -312,13 +311,13 @@ export const GameComponent = () => {
                         <image href={charactor2} x={charactor2X} y={charactor2Y} width="30" height="30" />
                         <image href={charactor3} x={charactor3X} y={charactor3Y} width="30" height="30" />
                         <image href={charactor4} x={charactor4X} y={charactor4Y} width="30" height="30" />
-                        {turn == 1 ? <image href={charactor1} x="1200" y="20" width="150" height="150" /> : turn == 2 ? <image href={charactor2} x="1200" y="20" width="150" height="150" />
-                            : turn == 3 ? <image href={charactor3} x="1200" y="20" width="150" height="150" /> : <image href={charactor4} x="1200" y="20" width="150" height="150" />}
+                        {turn === 1 ? <image href={charactor1} x="1200" y="20" width="150" height="150" /> : turn === 2 ? <image href={charactor2} x="1200" y="20" width="150" height="150" />
+                            : turn === 3 ? <image href={charactor3} x="1200" y="20" width="150" height="150" /> : <image href={charactor4} x="1200" y="20" width="150" height="150" />}
                     </svg>
                 </Grid>
                 <Grid item style={{ position: 'relative', top: '100px', left: '500px' }}>
-                    {turn == 1 ? <img src={charactor1} style={{ width: '500%', height: 'auto' }} /> : turn == 2 ? <img src={charactor2} style={{ width: '500%', height: 'auto' }} />
-                        : turn == 3 ? <img src={charactor3} style={{ width: '500%', height: 'auto' }} /> : <img src={charactor4} style={{ width: '500%', height: 'auto' }} />}
+                    {turn === 1 ? <img src={charactor1} alt={""} style={{ width: '500%', height: 'auto' }} /> : turn === 2 ? <img src={charactor2} alt={""} style={{ width: '500%', height: 'auto' }} />
+                        : turn === 3 ? <img src={charactor3} alt={""} style={{ width: '500%', height: 'auto' }} /> : <img src={charactor4} alt={""} style={{ width: '500%', height: 'auto' }} />}
                 </Grid>
                 <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                     <Box sx={{ fontSize: "64px" }}>
