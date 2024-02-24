@@ -8,3 +8,8 @@ export function shuffleArray<T>(array: T[]): T[] {
 
   return result;
 }
+
+export function getRandomValues<T>(array: T[], count: number): T[] {
+  const offset = Math.min(array.length, count);
+  return shuffleArray(array).slice(0, offset);
+}
