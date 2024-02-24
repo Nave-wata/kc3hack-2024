@@ -11,6 +11,8 @@ import {
     Typography
 } from "@mui/material";
 import { Pelmanism } from "../features/pelmanism";
+import { Bokes } from "../features/bokes";
+import { Quizzes } from "../features/quizzes";
 
 const head = () => {
     return (
@@ -107,7 +109,7 @@ export const Home = () => {
 
     return (
         <MainLayout title={"関西双六 - " + isFullScreen ? "ようこそ！" : "ゲーム"} head={head()}>
-            {isFullScreen ? <GameComponent /> : HomeComponent()}
+            {isFullScreen ? <Quizzes prefecture="大阪" /> : HomeComponent()}
         </MainLayout>
     )
 }
