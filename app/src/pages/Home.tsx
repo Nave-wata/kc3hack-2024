@@ -88,7 +88,7 @@ export const Home = () => {
                     </Typography>
                     <Typography id="modal-modal-description" >
                         <br />
-                        ・対戦人数は1～4人<br />
+                        ・対戦人数は4人<br />
                         ・先頭のプレイヤーがゴールに到達するとゲーム終了<br />
                         ・イベントマスに止まるとミニゲームスタート！<br />
                         ・ミニゲームで勝利するとポイントゲット！<br />
