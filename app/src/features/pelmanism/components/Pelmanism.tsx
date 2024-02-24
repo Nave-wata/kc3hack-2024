@@ -227,6 +227,6 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
       </Box >
     );
   } else {
-    return <GameComponent score={score} />;
+    return <GameComponent score={score} />
   }
 }
