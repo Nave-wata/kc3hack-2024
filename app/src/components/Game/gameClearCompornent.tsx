@@ -51,7 +51,7 @@ export const GameClearComponent = () => {
                         <img src={goalimage} alt="失敗" width={650}/>
                     </Box>
                     <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", flex: 1}}>
-                    <Button variant="contained" color="inherit" href="../../pages/Home.tsx" sx={{ fontSize: "18px", position: "relative", width: '200px', height: '50px', }}>
+                    <Button variant="contained" color="inherit" href="/" sx={{ fontSize: "18px", position: "relative", width: '200px', height: '50px', }}>
                         タイトル画面へ
                     </Button>
                 </Box>
