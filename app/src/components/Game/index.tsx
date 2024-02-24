@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { is_set } from "../../utils/isType";
-import { create } from "domain";
 import Kinki from "../../assets/images/Kinki";
 import charactor1 from "../../assets/images/Charactor/charactor1.png";
 import charactor2 from "../../assets/images/Charactor/charactor2.png";
 import charactor3 from "../../assets/images/Charactor/charactor3.png";
 import charactor4 from "../../assets/images/Charactor/charactor4.png";
 import { Coordinate } from "./Coordinate";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { dice_1, dice_2, dice_3, dice_4, dice_5, dice_6, default_dice } from "../../assets/images/Dice/index";
+import { GameClearComponent } from "./gameClearCompornent";
 import { BokeEvaluation } from "../../features/boke_evaluation";
 import { Bokes } from "../../features/bokes";
 import { Pelmanism } from "../../features/pelmanism";
@@ -173,7 +173,7 @@ export const GameComponent = () => {
                 }
             }
             setAnounce("")
-            if (turn == 4) {
+            if (turn === 4) {
                 turn = 1
             } else {
                 turn++
@@ -181,6 +181,16 @@ export const GameComponent = () => {
             setdiceroll(false)     //プレイヤーの位置が決まったのでサイコロをふれる状態にする
         } else {
             setAnounce("サイコロをふってください")
+        }
+    }
+
+    const isGoal = () => {
+        if ((charactor1X === 785 && charactor1Y === 560) || (charactor2X === 805 && charactor2Y === 560) ||
+            (charactor3X === 785 && charactor3Y === 580) || (charactor4X === 805 && charactor4Y === 580)) {
+            return true
+        }
+        else {
+            return false
         }
     }
 
@@ -199,31 +209,31 @@ export const GameComponent = () => {
             setdiceroll(true)
             setAnounce("")
             //出目の最大を設定↓↓
-            if (turn == 1) {
+            if (turn === 1) {
                 setdiceMaximum(i1 + randomIndex + 1)
             }
-            if (turn == 2) {
+            if (turn === 2) {
                 setdiceMaximum(i2 + randomIndex + 1)
             }
-            if (turn == 3) {
+            if (turn === 3) {
                 setdiceMaximum(i3 + randomIndex + 1)
             }
-            if (turn == 4) {
+            if (turn === 4) {
                 setdiceMaximum(i4 + randomIndex + 1)
             }
             //ここまで
 
             //出目の最小を設定↓↓
-            if (turn == 1) {
+            if (turn === 1) {
                 setdiceMinimum(i1)
             }
-            if (turn == 2) {
+            if (turn === 2) {
                 setdiceMinimum(i2)
             }
-            if (turn == 3) {
+            if (turn === 3) {
                 setdiceMinimum(i3)
             }
-            if (turn == 4) {
+            if (turn === 4) {
                 setdiceMinimum(i4)
             }
             //ここまで
@@ -254,11 +264,11 @@ export const GameComponent = () => {
         switch (turn) {
             case 2:
                 cpumove = i2 + diceMaximum
-                if(cpumove < coordinates.length){
+                if (cpumove < coordinates.length) {
                     for (let i = 0; i < diceMaximum; i++) {
                         move_1step()
                     }
-                }else{
+                } else {
                     cpugoal = cpumove - coordinates.length
                     for (let i = 0; i < diceMaximum - cpugoal - 1; i++) {
                         move_1step()
@@ -267,11 +277,11 @@ export const GameComponent = () => {
                 break;
             case 3:
                 cpumove = i3 + diceMaximum
-                if(cpumove < coordinates.length){
+                if (cpumove < coordinates.length) {
                     for (let i = 0; i < diceMaximum; i++) {
                         move_1step()
                     }
-                }else{
+                } else {
                     cpugoal = cpumove - coordinates.length
                     for (let i = 0; i < diceMaximum - cpugoal - 1; i++) {
                         move_1step()
@@ -280,11 +290,11 @@ export const GameComponent = () => {
                 break;
             case 4:
                 cpumove = i4 + diceMaximum
-                if(cpumove < coordinates.length){
+                if (cpumove < coordinates.length) {
                     for (let i = 0; i < diceMaximum; i++) {
                         move_1step()
                     }
-                }else{
+                } else {
                     cpugoal = cpumove - coordinates.length
                     for (let i = 0; i < diceMaximum - cpugoal - 1; i++) {
                         move_1step()
@@ -302,6 +312,11 @@ export const GameComponent = () => {
 
     return (
         <Box style={containerStyle}>
+            {isGoal() && (
+                <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 9999 }}>
+                    <GameClearComponent />
+                </div>
+            )}
             {(turn == 2 && Minigame == 0) ? <BokeEvaluation /> : (turn == 2 && Minigame == 1) ? <Bokes /> : 
              (turn == 2 && Minigame == 2) ? <Pelmanism pairNumber={5} /> : 
              (turn == 2 && Minigame == 3 && (i1 < 3 || i3 > 39)) ?<Quizzes prefecture="大阪" /> :
@@ -320,12 +335,11 @@ export const GameComponent = () => {
                         <image href={charactor2} x={charactor2X} y={charactor2Y} width="30" height="30" />
                         <image href={charactor3} x={charactor3X} y={charactor3Y} width="30" height="30" />
                         <image href={charactor4} x={charactor4X} y={charactor4Y} width="30" height="30" />
-                        
                     </svg>
                 </Grid>
                 <Grid item style={{ position: 'relative', top: '100px', left: '500px' }}>
-                    {turn == 1 ? <img src={charactor1} style={{ width: '500%', height: 'auto' }}/> : turn == 2 ? <img src={charactor2} style={{ width: '500%', height: 'auto' }}/>
-                            : turn == 3 ? <img src={charactor3} style={{ width: '500%', height: 'auto' }}/> : <img src={charactor4} style={{ width: '500%', height: 'auto' }}/>}
+                    {turn === 1 ? <img src={charactor1} alt={""} style={{ width: '500%', height: 'auto' }} /> : turn === 2 ? <img src={charactor2} alt={""} style={{ width: '500%', height: 'auto' }} />
+                        : turn === 3 ? <img src={charactor3} alt={""} style={{ width: '500%', height: 'auto' }} /> : <img src={charactor4} alt={""} style={{ width: '500%', height: 'auto' }} />}
                 </Grid>
                 <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                     <Box sx={{ fontSize: "64px" }}>
@@ -351,11 +365,11 @@ export const GameComponent = () => {
 
 
                     <Grid container justifyContent="center" spacing={2} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <Grid item sx={{ paddingBottom: 3 }} style={{ marginTop: '5%' ,marginBottom: '2%'}}>
-                        <Button variant="contained" color="inherit" onClick={back_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ戻る</Button>
+                        <Grid item sx={{ paddingBottom: 3 }} style={{ marginTop: '5%', marginBottom: '2%' }}>
+                            <Button variant="contained" color="inherit" onClick={back_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ戻る</Button>
                         </Grid>
-                        <Grid item sx={{ paddingBottom: 3 }} style={{ marginTop: '5%' ,marginBottom: '2%'}}>
-                        <Button variant="contained" color="inherit" onClick={move_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ進む</Button>
+                        <Grid item sx={{ paddingBottom: 3 }} style={{ marginTop: '5%', marginBottom: '2%' }}>
+                            <Button variant="contained" color="inherit" onClick={move_1step} sx={{ fontSize: "20px", position: "relative", width: '120px', height: '70px', }}>1つ進む</Button>
                         </Grid>
                     </Grid>
                     <Grid container justifyContent="center">
@@ -369,7 +383,7 @@ export const GameComponent = () => {
                      <Box sx={{ fontSize: "32px", color: "red" }}>ゴール</Box> : <div />}
                     {turn >= 2 && turn <= 4 ? <Cpu /> : <div />}
                 </Grid>
-                
+
             </Grid>
         </Box>
     )
