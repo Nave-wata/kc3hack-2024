@@ -26,14 +26,14 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
   const [timeLeft, setTimeLeft] = React.useState(1);
   const [isClickedBackoButton, setisClickedBackoButton] = React.useState(false);
   const [isTimeFinished, setTimeFinished] = React.useState(false)
-  const [isCardget, setCardget] = React.useState(false)
+
 
 
 
 
   useEffect(() => {
     if (isGameStarted) {
-      setTimeLeft(30); // 初期化
+      setTimeLeft(1); // 初期化
     }
   }, [isGameStarted]); // ゲーム開始時にtimeLeftを10に初期化
 
@@ -86,21 +86,19 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
     newIsShows[index] = true;
     setIsShows(newIsShows);
 
+
     if (openItems.length === 0) {
       setOpenItems([item]);
       return;
     }
 
     if (openItems[0].id === item.id) {
+      setScore(score + 1); // スコアを1ふやす
       setOpenItems([]);
       return;
     }
 
     const resetIsShows = newIsShows.map((value, itemIndex) => pelmanismItems[itemIndex].id === openItems[0].id || pelmanismItems[itemIndex].id === item.id ? false : value);
-    if (!resetIsShows) {
-      setCardget(true)
-      setCardget(false)
-    }
     setIsResetting(true);
 
 
@@ -115,12 +113,7 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
     setOpenItems([]);
   };
 
-  useEffect(() => {
-    if (!isCardget) {
-      setScore(score + 1)
-    }
-    return
-  }, [isCardget]);
+
 
 
   useEffect(() => {
@@ -150,7 +143,7 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
                   key={index}
                   style={{ backgroundColor: "blue", color: "white", position: "relative", width: "120px", height: "240px", margin: "1rem" }}
                   className="pelmanism-button"
-                  onClick={() => handleButtonClick(item, index)}
+                  onClick={() => { handleButtonClick(item, index); }}
                 >
                   {isShows[index] ? item.text : <img src={CardImage} style={{
                     position: "absolute",
@@ -171,7 +164,7 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
           </Grid>
           <Grid container item xs={3}>
             <Grid item xs={12}>
-              <Grid container direction="column" alignItems="center" marginLeft="-2.5rem">
+              <Grid container direction="column" alignItems="center" marginLeft="-4.5rem">
                 <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}><br /><br /></Grid>
                 <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}>
                   <Box style={{ backgroundColor: '#f0f0f0', color: 'black', padding: '5px 15px' }}>
@@ -179,7 +172,7 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
                   </Box>
                 </Grid>
                 <Grid item xs={12}>
-                  <Box sx={{ display: "flex", textAlign: "center", height: "100%"}} style={{ backgroundColor: '#f0f0f0', color: 'black', padding: '5px 30px'}}>{score}</Box>
+                  <Box sx={{ display: "flex", textAlign: "center", height: "100%"}} style={{ backgroundColor: '#f0f0f0', color: 'black', padding: '5px 34px'}}>{score}</Box>
                 </Grid>
               </Grid>
             </Grid>
@@ -191,10 +184,17 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
                   </span>
                   </Button>
               </Grid>
-            )}{isGameStarted && (
-              <Grid item marginLeft="-2.5rem" xs={12} >
+            )}{(isGameStarted && !isTimeFinished) && (
+              <Grid item marginLeft="-2.5rem" xs={12}>
                 <Typography variant="h5" align="center">
                   制限時間: {timeLeft}
+                </Typography>
+              </Grid>)}
+              
+            {isTimeFinished && (
+              <Grid item marginLeft="-2.5rem" xs={12}>
+                <Typography variant="h5" align="center">
+                  ゲーム終了<br />スコアは{score}です<br />すごろくに戻るボタンを押してください
                 </Typography>
               </Grid>)}
             <Grid item marginLeft="4.3rem" xs={12} marginTop={'-30px'}>
@@ -233,7 +233,7 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
                 </Box>
               </Modal>
             </Grid>
-            <Grid marginLeft="3.0rem" item xs={12} marginTop={'-100px'}>
+            <Grid marginLeft="3rem" item xs={12} marginTop={'-100px'}>
               <Button variant="contained" color="inherit" onClick={() => setGameFinished(true)} style={{ fontSize: '20px' }}>
                 <span>
                 すごろくに戻る
@@ -245,6 +245,6 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
       </Box >
     );
   } else {
-    return <GameComponent />;
+    return <GameComponent score={score} />
   }
 }
