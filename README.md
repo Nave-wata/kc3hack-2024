@@ -1,7 +1,7 @@
 # プロダクト名 　関西双六
 <!-- プロダクト名に変更してください -->
 
-![プロダクト名]((https://github.com/Obanyan2023/kc3hack-2024_K/blob/main/app/src/assets/images/Background/background.png?raw=true))
+![プロダクト名](https://github.com/Obanyan2023/kc3hack-2024_K/blob/main/app/src/assets/images/Background/background.png?raw=true)
 <!-- プロダクト名・イメージ画像を差し変えてください -->
 
 
