@@ -19,21 +19,6 @@ const head = () => {
         <link href="https://fonts.googleapis.com/css2?family=Aoboshi+One&family=Dela+Gothic+One&family=DotGothic16&family=Kiwi+Maru:wght@500&family=Mochiy+Pop+P+One&family=Zen+Antique&family=Zen+Kurenaido&display=swap" rel="stylesheet"></link>
     );
 };
-const setWinSize = () => {
-    const windowSize = {
-        width: window.innerWidth,
-        height: window.innerHeight
-    };
-    const imageUrlWithParams = `${Background}?w=${windowSize.width}&h=${windowSize.height}`;
-
-    return imageUrlWithParams;
-};
-const image = {
-    backgroundImage: `url(${setWinSize()})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',  // 画像の繰り返しを無効にする
-    backgroundPosition: 'center'
-};
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -64,22 +49,24 @@ export const Home = () => {
     const handleClose = () => setOpen(false);
 
     const HomeComponent = () => (
-        <Box sx={image}>
-            <Box sx={{ minHeight: '100vh', minWidth: '100vw', justifyContent: "space-between" }}>
-                <Grid container direction="column" alignItems="center" spacing={2}>
-                    <Grid item xs={12} style={{ marginTop: '30%' }}>
-                        <Button variant="contained" color="success" size="large" onClick={() => handleGameStart()}>ゲームスタート</Button>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button variant="contained" color='inherit' size="large" onClick={handleOpen}>ルール</Button>
-                    </Grid>
+        <Box>
+            <Grid container direction="column" alignItems="center" spacing={2}>
+                <Grid item xs={12} style={{ marginTop: '30%' }}>
+                    <Button variant="contained" color="success" size="large" onClick={() => handleGameStart()}>ゲームスタート</Button>
                 </Grid>
-            </Box>
+                <Grid item xs={12}>
+                    <Button variant="contained" color='inherit' size="large" onClick={handleOpen}>ルール</Button>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button variant="contained" color='inherit' size="large" href="/games">ミニゲーム</Button>
+                </Grid>
+            </Grid>
+
             <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" align="center" variant="h4" component="h2">

@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
 import { useQuizzes } from "../api/getQuizzes";
 import { is_set } from "../../../utils/isType";
-import { Quiz } from "../types";
+import { Prefecture, Quiz } from "../types";
 import { Box, Button, Grid, Modal, Typography } from "@mui/material";
 import { GameComponent } from "../../../components/Game";
 import { shuffleArray } from "../../../utils/array";
-
-
-type Prefecture = "大阪" | "京都" | "兵庫" | "奈良" | "三重" | "滋賀" | "和歌山";
 
 export function Quizzes({ prefecture }: { prefecture: Prefecture }) {
   const quizzesQuery = useQuizzes();

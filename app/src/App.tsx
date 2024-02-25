@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import { Home } from './pages/Home';
 import AppProvider from "./providers";
+import { AppRouter } from "./routes";
 
 function App() {
   return (
     <AppProvider>
-      <Home />
+      <AppRouter/>
     </AppProvider>
   );
 }
