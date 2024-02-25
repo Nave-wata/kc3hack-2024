@@ -33,7 +33,7 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
 
   useEffect(() => {
     if (isGameStarted) {
-      setTimeLeft(1); // 初期化
+      setTimeLeft(25); // 初期化
     }
   }, [isGameStarted]); // ゲーム開始時にtimeLeftを10に初期化
 
