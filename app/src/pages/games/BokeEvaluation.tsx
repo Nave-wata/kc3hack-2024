@@ -4,7 +4,7 @@ import { BokeEvaluation as BokeEvaluationComponent } from "../../features/boke_e
 
 export function BokeEvaluation() {
   return (
-    <MainLayout title={"関西双六 - 神経衰弱ゲーム！"}>
+    <MainLayout title={"関西双六 - なんでやねんBOT！"}>
       <BokeEvaluationComponent/>
     </MainLayout>
   );

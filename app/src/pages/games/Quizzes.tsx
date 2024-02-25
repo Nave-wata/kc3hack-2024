@@ -12,7 +12,7 @@ export function Quizzes() {
   }, []);
 
   return (
-    <MainLayout title={"関西双六 - 神経衰弱ゲーム！"}>
+    <MainLayout title={"関西双六 - クイズ！"}>
       <QuizzesComponent prefecture={prefecture as Prefecture}/>
     </MainLayout>
   );
