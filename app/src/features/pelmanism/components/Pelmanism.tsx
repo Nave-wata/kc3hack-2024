@@ -160,20 +160,29 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
           <Grid item xs={1}>
             <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
               <div style={{ width: "2px", backgroundColor: "black", height: "100%", margin: "auto" }} />
-            </div>        </Grid>
+            </div>        
+          </Grid>
           <Grid container item xs={3}>
             <Grid item xs={12}>
-              <Grid container direction="column" alignItems="center" marginLeft="-2.5rem">
+              <Grid container direction="column" alignItems="center" marginLeft="-4.5rem">
                 <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}><br /><br /></Grid>
-                <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}>スコア</Grid>
+                <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}>
+                  <Box style={{ backgroundColor: '#f0f0f0', color: 'black', padding: '5px 15px' }}>
+                    スコア
+                  </Box>
+                </Grid>
                 <Grid item xs={12}>
-                  <Box sx={{ display: "flex", textAlign: "center", height: "100%" }}>{score}</Box>
+                  <Box sx={{ display: "flex", textAlign: "center", height: "100%"}} style={{ backgroundColor: '#f0f0f0', color: 'black', padding: '5px 34px'}}>{score}</Box>
                 </Grid>
               </Grid>
             </Grid>
             {!isGameStarted && (
-              <Grid item marginLeft="3rem" xs={12}>
-                <Button variant="contained" onClick={() => setGameStarted(true)}>神経衰弱スタート</Button>
+              <Grid item marginLeft="1rem"  xs={12}>
+                <Button variant="contained" color="warning" onClick={() => setGameStarted(true)} sx={{ fontSize: "25px", position: "relative", width: '250px', height: '100px'}}>
+                  <span style={{ color: "white" }}>
+                    神経衰弱スタート
+                  </span>
+                  </Button>
               </Grid>
             )}{(isGameStarted && !isTimeFinished) && (
               <Grid item marginLeft="-2.5rem" xs={12}>
@@ -181,14 +190,15 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
                   制限時間: {timeLeft}
                 </Typography>
               </Grid>)}
+              
             {isTimeFinished && (
               <Grid item marginLeft="-2.5rem" xs={12}>
                 <Typography variant="h5" align="center">
                   ゲーム終了<br />スコアは{score}です<br />すごろくに戻るボタンを押してください
                 </Typography>
               </Grid>)}
-            <Grid item marginLeft="4rem" xs={12}>
-              <Button variant="contained" onClick={handleOpen}>ルール説明</Button>
+            <Grid item marginLeft="4.3rem" xs={12} marginTop={'-30px'}>
+              <Button variant="contained" onClick={handleOpen} style={{ fontSize: '20px' }} color="inherit">ルール説明</Button>
               <Modal
                 open={open}
                 onClose={handleClose}
@@ -196,31 +206,39 @@ export function Pelmanism({ pairNumber }: { pairNumber: number }) {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
-                  <Typography id="modal-modal-title" align="center" variant="h4" component="h2">
-                    ⚁ルール⚂
-                  </Typography>
-                  <Typography id="modal-modal-description" align="center" sx={{ mt: 2 }}>
-                    <b>関西の観光地をすごろくでまわろう‼‼</b><br />
+                <Typography id="modal-modal-title" align="center" variant="h4" component="h2">
+                    ～神経衰弱～<br />
                   </Typography>
                   <Typography id="modal-modal-description" >
                     <br />
-                    ・対戦人数は1～4人<br />
-                    ・先頭のプレイヤーがゴールに到達するとゲーム終了<br />
-                    ・イベントマスに止まるとミニゲームスタート！<br />
-                    ・ミニゲームで勝利するとポイントゲット！<br />
-                    ・勝敗はポイントが一番多い人が勝利<br />
-                    <br />
-
-                    <strong>ミニゲームでたくさん勝利してポイントを稼ごう‼‼‼<br /></strong>
+                    ・カードのペアは関西弁と標準語<br />
+                    例<br />
+                    「あかん」＝「だめ」<br />
+                    「ちゃう」＝「違う」<br />
+                    「ほんま」＝「本当」<br />
+                    
+                    ・制限時間は20秒<br />
+                    ・時間内に獲得したペアに応じてポイントゲット‼‼<br />
+                  </Typography>
+                  <Typography id="modal-modal-title" align="center"> 
+                    5ペア→5ポイント<br />
+                    4ペア→4ポイント<br />
+                    3ペア→3ポイント<br />
+                    2ペア→2ポイント<br />
+                    1ペア→1ポイント<br />
                   </Typography>
                   <Box sx={{ textAlign: "right", }}>
                     <Button variant="contained" onClick={handleClose}>閉じる</Button>
                   </Box>
                 </Box>
               </Modal>
-              <Grid item xs={12}>
-                <Button variant="contained" onClick={() => setGameFinished(true)}>すごろくに戻る</Button>
-              </Grid>
+            </Grid>
+            <Grid marginLeft="3rem" item xs={12} marginTop={'-100px'}>
+              <Button variant="contained" color="inherit" onClick={() => setGameFinished(true)} style={{ fontSize: '20px' }}>
+                <span>
+                すごろくに戻る
+                </span>
+                </Button>
             </Grid>
           </Grid>
         </Grid>
