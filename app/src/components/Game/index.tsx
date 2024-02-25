@@ -263,7 +263,6 @@ export const GameComponent = ({ score }: { score?: number }) => {
     useEffect(() => {
         if (typeof score !== 'undefined') {
             setScore(Playerscore + score);
-            console.log("スコア")
         } else {
             setScore(Playerscore);
         }
