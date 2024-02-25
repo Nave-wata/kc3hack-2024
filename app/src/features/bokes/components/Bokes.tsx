@@ -141,15 +141,23 @@ function BokeComponent(boke: Boke) {
           <Grid item xs={12}>
             <Grid container direction="column" alignItems="center" marginLeft="-2.5rem">
               <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}><br /><br /></Grid>
-              <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}>スコア</Grid>
+              <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}>
+                <Box style={{ background: "#f0f0f0", color: "black", padding: "5px 15px" }}> 
+                  スコア
+                </Box>
+              </Grid>
               <Grid item xs={12}>
-                <Box sx={{ display: "flex", textAlign: "center", height: "100%" }}>{score}</Box>
+                <Box sx={{ display: "flex", textAlign: "center", height: "100%" }} style={{ background: "#f0f0f0", color: "black", padding: "5px 34px" }}>{score}</Box>
               </Grid>
             </Grid>
           </Grid>
           {!isGameStarted && (
-            <Grid item marginLeft="3rem" xs={12}>
-              <Button variant="contained" onClick={() => setGameStarted(true)}>ボケbotスタート</Button>
+            <Grid item marginLeft="1rem" xs={12}>
+              <Button variant="contained" color="warning" onClick={() => setGameStarted(true)} sx={{ fontSize: "25px", position: "relative", width: "250px", height: "100px"}}>
+                <span style={{ color: "white" }}>
+                ボケbotスタート
+                </span>
+              </Button>
             </Grid>
           )}{isGameStarted && (
             <Grid item marginLeft="-2.5rem" xs={12}>
@@ -157,8 +165,8 @@ function BokeComponent(boke: Boke) {
                 制限時間: {timeLeft}
               </Typography>
             </Grid>)}
-          <Grid item marginLeft="4rem" xs={12}>
-            <Button variant="contained" onClick={handleOpen}>ルール説明</Button>
+          <Grid item marginLeft="4.3rem" xs={12} marginTop={"-30px"}>
+            <Button variant="contained" onClick={handleOpen} style={{ fontSize: "20px"}} color="inherit">ルール説明</Button>
             <Modal
               open={open}
               onClose={handleClose}
@@ -167,21 +175,16 @@ function BokeComponent(boke: Boke) {
             >
               <Box sx={style}>
                 <Typography id="modal-modal-title" align="center" variant="h4" component="h2">
-                  ⚁ルール⚂
-                </Typography>
-                <Typography id="modal-modal-description" align="center" sx={{ mt: 2 }}>
-                  <b>関西の観光地をすごろくでまわろう‼‼</b><br />
+                  ～ボケbot～<br />
                 </Typography>
                 <Typography id="modal-modal-description" >
                   <br />
-                  ・対戦人数は1～4人<br />
-                  ・先頭のプレイヤーがゴールに到達するとゲーム終了<br />
-                  ・イベントマスに止まるとミニゲームスタート！<br />
-                  ・ミニゲームで勝利するとポイントゲット！<br />
-                  ・勝敗はポイントが一番多い人が勝利<br />
+                  ・表示された文章が「ボケ」なのか「ボケではない」のか判断しよう！<br />
+                  ・ボケの場合は「なんでやねん」ボタンを押す<br />
+                  ・ボケではない場合は「なんもない」ボタンを押す<br />
+                  ・正解してポイントゲット‼‼<br />
+                  正解→1点
                   <br />
-
-                  <strong>ミニゲームでたくさん勝利してポイントを稼ごう‼‼‼<br /></strong>
                 </Typography>
                 <Box sx={{ textAlign: "right", }}>
                   <Button variant="contained" onClick={handleClose}>閉じる</Button>
@@ -189,8 +192,12 @@ function BokeComponent(boke: Boke) {
               </Box>
             </Modal>
           </Grid>
-          <Grid marginLeft="3.0rem" item xs={12}>
-            <Button variant="contained" onClick={() => setGameFinished(true)}>すごろくに戻る</Button>
+          <Grid marginLeft="3.0rem" item xs={12} marginTop={"-100px"}>
+            <Button variant="contained" color="inherit" onClick={() => setGameFinished(true)} style={{ fontSize: "20px" }}>
+              <span>
+                すごろくに戻る
+              </span>
+            </Button>
           </Grid>
         </Grid>
       </Grid>
