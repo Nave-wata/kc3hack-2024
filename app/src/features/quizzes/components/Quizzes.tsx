@@ -12,9 +12,21 @@ export function Quizzes({ prefecture }: { prefecture: Prefecture }) {
   const quizzesQuery = useQuizzes();
   const [currentQuizIndex, setCurrentQuizIndex] = React.useState<number>(0);
 
+  const handleRetry = () => {
+    quizzesQuery.refetch();
+  };
 
   if (quizzesQuery.isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (quizzesQuery.isError) {
+    return (
+      <div>
+        Error loading quizzes.{" "}
+        <button onClick={handleRetry}>Retry</button>
+      </div>
+    );
   }
 
   if (!is_set<Quiz[]>(quizzesQuery.data)) {
@@ -64,6 +76,8 @@ function QuizComponent({ quiz, onAnswer }: { quiz: Quiz; onAnswer: () => void })
     borderRadius: '16px',
   };
 
+
+
   const handleAnswerClick = () => {
 
     if (isGameStarted) {
@@ -98,6 +112,11 @@ function QuizComponent({ quiz, onAnswer }: { quiz: Quiz; onAnswer: () => void })
     }
     return
   }, [isGameFinished]);
+
+
+  if (!quiz) {
+    return <div>Loading...</div>; // もしくはローディング中の処理を行う
+  }
 
   if (!isClickedBackoButton) {
     return (

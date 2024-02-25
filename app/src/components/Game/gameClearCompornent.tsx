@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import charactor1 from "../../assets/images/Charactor/charactor1.png";
 import charactor2 from "../../assets/images/Charactor/charactor2.png";
 import charactor3 from "../../assets/images/Charactor/charactor3.png";
@@ -7,7 +7,7 @@ import charactor4 from "../../assets/images/Charactor/charactor4.png";
 import goalimage from '../../assets/images/Background/goalend.png'
 
 
-export const GameClearComponent = () => {
+export const GameClearComponent = ({ score, ranking }: { score?: number, ranking: number }) => {
     const containerStyle: React.CSSProperties = {
         margin: 0,
         padding: 0,
@@ -26,25 +26,27 @@ export const GameClearComponent = () => {
         <Box style={containerStyle}>
             <Grid container>
                 <Grid item xs={3} md={3}>
-                    <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100vh", gap: "200px"}}>
-                        <img src={charactor4} alt="キャラクター" width={200}/>                        
-                        <img src={charactor1} alt="キャラクター" width={200}/>
+                    <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100vh", gap: "200px" }}>
+                        <img src={charactor4} alt="キャラクター" width={200} />
+                        <img src={charactor1} alt="キャラクター" width={200} />
                     </Box>
                 </Grid>
                 <Grid item xs={6} md={6}>
-                    <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", height: "80vh"}}>
-                        <img src={goalimage} alt="失敗" width={650}/>
+                    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh" }}>
+                        <img src={goalimage} alt="失敗" width={650} />
                     </Box>
-                    <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", flex: 1}}>
-                    <Button variant="contained" color="inherit" href="../../pages/Home.tsx" sx={{ fontSize: "18px", position: "relative", width: '200px', height: '50px', }}>
-                        タイトル画面へ
-                    </Button>
-                </Box>
+                    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", flex: 1 }}>
+                        {ranking === 1 && (<Typography>1Pのプレーヤーの勝利！<br />{score}点</Typography>)}
+                        {ranking !== 1 && (<Typography>CPUの勝利！</Typography>)}
+                        <Button variant="contained" color="inherit" href="../../pages/Home.tsx" sx={{ fontSize: "18px", position: "relative", width: '200px', height: '50px', }}>
+                            タイトル画面へ
+                        </Button>
+                    </Box>
                 </Grid>
                 <Grid item xs={3} md={3}>
-                    <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100vh", gap: "200px"}}>
-                        <img src={charactor3} alt="キャラクター" width={200}/>
-                        <img src={charactor2} alt="キャラクター" width={200}/>
+                    <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100vh", gap: "200px" }}>
+                        <img src={charactor3} alt="キャラクター" width={200} />
+                        <img src={charactor2} alt="キャラクター" width={200} />
                     </Box>
                 </Grid>
             </Grid>
