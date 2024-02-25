@@ -106,14 +106,31 @@ function QuizComponent({ quiz, onAnswer }: { quiz: Quiz; onAnswer: () => void })
             <Grid item xs={12} style={{ display: "flex", flexWrap: "wrap", width: "700px", height: "200px", marginBottom: "20rem", marginTop: "20px" }}>
               {quizNum > 0 && (
                 <Box key={quiz.id}>
-                  <span style={{ fontSize: "30px" }}>{quiz.quiz}</span>
+                  <Box>
+                    <span style={{backgroundColor: "purple", color: "white", position: "relative",
+                      top: "10%", left: "10%", width: "360px", height: "180px", fontSize: "30px"}}>{quiz.quiz}</span>
+                  </Box>
+                  <Box>
+                  <span style={{backgroundColor: "purple", color: "white", position: "relative",
+                    top: "10%", left: "10%", width: "360px", height: "180px", fontSize: "30px"}}>
                   <select onChange={(e) => setSelected(e.target.value)} style={{ fontSize: "20px" }}>
                     {shuffleArray<string>(quiz.choices).map((choice) => (
-                      <option key={choice} style={{ fontSize: "20px" }}>{choice}</option>
+                      <option key={choice}>
+                            {choice}
+                    </option>
                     ))}
                   </select>
-                  <button onClick={handleAnswerClick}>回答</button>
-                  <Typography>残り{quizNum}問</Typography>
+                  </span>
+                  </Box>
+                  <Box>
+                  <button style={{ backgroundColor: "purple", color: "white", position: "relative",
+                    top: "50%", left: "10%", width: "120px", height: "60px", fontSize: "30px"}} onClick={handleAnswerClick}>回答</button>
+                  </Box>
+                  <Box>
+                  <Typography variant="h4" color="white" fontSize={25} textAlign="center" marginLeft="-6rem">
+                    残り{quizNum}問
+                  </Typography>
+                  </Box>
                 </Box>
               )}
             </Grid>
@@ -126,25 +143,33 @@ function QuizComponent({ quiz, onAnswer }: { quiz: Quiz; onAnswer: () => void })
             <Grid item xs={12}>
               <Grid container direction="column" alignItems="center" marginLeft="-2.5rem">
                 <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}><br /><br /></Grid>
-                <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}>スコア</Grid>
+                <Grid item xs={12} sx={{ display: "flex", textAlign: "center", height: "100%" }}>
+                  <Box style={{ background: "#f0f0f0", color: "black", padding: "5px 15px" }}> 
+                    スコア
+                  </Box>
+                </Grid>
                 <Grid item xs={12}>
-                  <Box sx={{ display: "flex", textAlign: "center", height: "100%" }}>{score}</Box>
+                  <Box sx={{ display: "flex", textAlign: "center", height: "100%" }} style={{ background: "#f0f0f0", color: "black", padding: "5px 34px" }}>{score}</Box>
                 </Grid>
               </Grid>
             </Grid>
             {!isGameStarted && (
               <Grid item marginLeft="3rem" xs={12}>
-                <Button variant="contained" onClick={() => setGameStarted(true)}>クイズスタート</Button>
+                <Button variant="contained" color="warning" onClick={() => setGameStarted(true)} sx={{ fontSize: "25px", position: "relative", width: "250px", height: "100px"}}>
+                  <span style={{ color: "white" }}>
+                    クイズスタート
+                  </span>
+                </Button>
               </Grid>
             )}{isGameStarted && (
               <Grid item marginLeft="3rem" xs={12}>
                 {quizNum > 0 && (<Typography variant="h4">{quizAns}</Typography>)}
-                {quizNum <= 0 && (<Typography variant="h4" fontSize={15} textAlign="center" marginLeft="-6rem">
+                {quizNum <= 0 && (<Typography variant="h4" color="white" fontSize={20} textAlign="center" marginLeft="-6rem">
                   クイズ終了です<br />あなたのスコアは{score}点です<br />すごろくに戻ってください</Typography>)}
               </Grid>
             )}
-            <Grid item marginLeft="4rem" xs={12}>
-              <Button variant="contained" onClick={handleOpen}>ルール説明</Button>
+            <Grid item marginLeft="4.3rem" xs={12} marginTop={"-30px"}>
+              <Button variant="contained" onClick={handleOpen} style={{ fontSize: "20px"}} color="inherit">ルール説明</Button>
               <Modal
                 open={open}
                 onClose={handleClose}
@@ -153,29 +178,30 @@ function QuizComponent({ quiz, onAnswer }: { quiz: Quiz; onAnswer: () => void })
               >
                 <Box sx={style}>
                   <Typography id="modal-modal-title" align="center" variant="h4" component="h2">
-                    ⚁ルール⚂
-                  </Typography>
-                  <Typography id="modal-modal-description" align="center" sx={{ mt: 2 }}>
-                    <b>関西の観光地をすごろくでまわろう‼‼</b><br />
+                    ～観光地クイズ～<br />
                   </Typography>
                   <Typography id="modal-modal-description" >
                     <br />
-                    ・対戦人数は1～4人<br />
-                    ・先頭のプレイヤーがゴールに到達するとゲーム終了<br />
-                    ・イベントマスに止まるとミニゲームスタート！<br />
-                    ・ミニゲームで勝利するとポイントゲット！<br />
-                    ・勝敗はポイントが一番多い人が勝利<br />
+                    ～観光地クイズ～<br />
+                    ・関西の観光地にまつわる4択クイズを解こう！<br />
+                    ・問題は全3問<br />
+                    ・正解数に応じてポイントゲット‼‼<br />
+                    3問正解→3点<br />
+                    2問正解→2点<br />
+                    1問正解→1点<br />
                     <br />
-
-                    <strong>ミニゲームでたくさん勝利してポイントを稼ごう‼‼‼<br /></strong>
                   </Typography>
                   <Box sx={{ textAlign: "right", }}>
                     <Button variant="contained" onClick={handleClose}>閉じる</Button>
                   </Box>
                 </Box>
               </Modal>
-              <Grid item xs={12}>
-                <Button variant="contained" onClick={() => setGameFinished(true)}>すごろくに戻る</Button>
+              <Grid marginLeft="3.0rem" item xs={12} marginTop={"-100px"}>
+                <Button variant="contained" color="inherit" onClick={() => setGameFinished(true)} style={{ fontSize: "20px" }}>
+                  <span>
+                    すごろくに戻る
+                  </span>
+                </Button>
               </Grid>
             </Grid>
           </Grid>
