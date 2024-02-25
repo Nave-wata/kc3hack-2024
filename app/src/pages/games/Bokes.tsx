@@ -4,7 +4,7 @@ import { Bokes as BokesComponent } from "../../features/bokes";
 
 export function Bokes() {
   return (
-    <MainLayout title={"関西双六 - 神経衰弱ゲーム！"}>
+    <MainLayout title={"関西双六 - ボケBOT！"}>
       <BokesComponent/>
     </MainLayout>
   );
