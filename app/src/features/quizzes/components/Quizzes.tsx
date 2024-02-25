@@ -4,6 +4,7 @@ import { is_set } from "../../../utils/isType";
 import { Prefecture, Quiz } from "../types";
 import { Box, Button, Grid, Modal, Typography } from "@mui/material";
 import { GameComponent } from "../../../components/Game";
+import { shuffleArray } from "../../../utils/array";
 
 export function Quizzes({ prefecture }: { prefecture: Prefecture }) {
   const quizzesQuery = useQuizzes();
@@ -19,10 +20,11 @@ export function Quizzes({ prefecture }: { prefecture: Prefecture }) {
   }
 
   const quizzes = quizzesQuery.data.filter((quiz) => quiz.prefecture === prefecture);
+  const shuffledQuizzes = shuffleArray<Quiz>(quizzes);
 
   const handleAnswer = () => {
     // Check if there are more quizzes available
-    if (currentQuizIndex + 1 < quizzes.length) {
+    if (currentQuizIndex + 1 < shuffledQuizzes.length) {
       // If more quizzes available, move to the next quiz
       setCurrentQuizIndex(currentQuizIndex + 1);
     } else {
@@ -31,7 +33,7 @@ export function Quizzes({ prefecture }: { prefecture: Prefecture }) {
     }
   };
 
-  return <QuizComponent quiz={quizzes[currentQuizIndex]} onAnswer={handleAnswer} />;
+  return <QuizComponent quiz={shuffledQuizzes[currentQuizIndex]} onAnswer={handleAnswer} />;
 }
 
 
@@ -106,7 +108,7 @@ function QuizComponent({ quiz, onAnswer }: { quiz: Quiz; onAnswer: () => void })
                 <Box key={quiz.id}>
                   <span style={{ fontSize: "30px" }}>{quiz.quiz}</span>
                   <select onChange={(e) => setSelected(e.target.value)} style={{ fontSize: "20px" }}>
-                    {quiz.choices.map((choice) => (
+                    {shuffleArray<string>(quiz.choices).map((choice) => (
                       <option key={choice} style={{ fontSize: "20px" }}>{choice}</option>
                     ))}
                   </select>

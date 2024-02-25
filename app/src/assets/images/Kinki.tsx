@@ -11,23 +11,23 @@ function onHover<T>(e: React.MouseEvent<T>, ...hoverHandlers: Array<(e: React.Mo
 }
 
 export default function Kinki() {
-  const Hyougo = (e: React.MouseEvent<SVGPathElement>) => console.log("兵庫県");
+  const Hyougo = (e: React.MouseEvent<SVGPathElement>) => null;
 
-  const Awajishima = (e: React.MouseEvent<SVGPathElement>) => console.log("淡路島");
+  const Awajishima = (e: React.MouseEvent<SVGPathElement>) => null;
 
-  const Kyoto = (e: React.MouseEvent<SVGPathElement>) => console.log("京都府");
+  const Kyoto = (e: React.MouseEvent<SVGPathElement>) => null;
 
-  const Osaka = (e: React.MouseEvent<SVGPathElement>) => console.log("大阪府");
+  const Osaka = (e: React.MouseEvent<SVGPathElement>) => null;
 
-  const Shiga = (e: React.MouseEvent<SVGPathElement>) => console.log("滋賀県");
+  const Shiga = (e: React.MouseEvent<SVGPathElement>) => null;
 
-  const Nara = (e: React.MouseEvent<SVGPathElement>) => console.log("奈良県");
+  const Nara = (e: React.MouseEvent<SVGPathElement>) => null;
 
-  const Wakayama = (e: React.MouseEvent<SVGPathElement>) => console.log("和歌山県");
+  const Wakayama = (e: React.MouseEvent<SVGPathElement>) => null;
 
-  const Mie = (e: React.MouseEvent<SVGPathElement>) => console.log("三重県");
+  const Mie = (e: React.MouseEvent<SVGPathElement>) => null;
 
-  const Biwako = (e: React.MouseEvent<SVGPathElement>) => console.log("琵琶湖");
+  const Biwako = (e: React.MouseEvent<SVGPathElement>) => null;
 
   const masu_width = 32
   const masu_height = 32

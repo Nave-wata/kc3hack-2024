@@ -1,8 +1,8 @@
+import React from "react";
+import { Helmet } from "react-helmet-async";
 import "../../App.css";
-//import { Helmet } from "react-helmet-async";
- 
-type HeadProps = {
 
+type HeadProps = {
     title: string;
     children?: React.ReactNode;
 };
@@ -14,9 +14,9 @@ type HeadProps = {
 
 export const Head = ({ title, children }: HeadProps) => {
     return (
-        <div>
+        <Helmet>
             <title>{title}</title>
             {children}
-        </div>
+        </Helmet>
     );
 }
