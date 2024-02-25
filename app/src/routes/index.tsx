@@ -16,7 +16,6 @@ export function AppRouter() {
       <Route path={"/games"} element={<Games/>}/>
       <Route path={"/games/bokes"} element={<Bokes/>}/>
       <Route path={"/games/pelmanism"} element={<Pelmanism/>}/>
-      <Route path={"/games/nandeyanen"} element={<BokeEvaluation/>}/>
       <Route path={"/games/quizzes"} element={<Quizzes/>}/>
       <Route path={"*"} element={<NotFound/>}/>
     </Routes>

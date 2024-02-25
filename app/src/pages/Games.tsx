@@ -11,9 +11,6 @@ export function Games() {
           <Typography variant="h6" my={2}>ここでは、関西双六のミニゲームを楽しむことができます。</Typography>
           <Grid container direction="column" alignItems="center" spacing={2}>
             <Grid item xs={12}>
-              <Button variant="contained" color="primary" size="large" href={"/games/nandeyanen"}>なんでやねん Bot</Button>
-            </Grid>
-            <Grid item xs={12}>
               <Button variant="contained" color="primary" size="large" href={"/games/bokes"}>ボケ Bot</Button>
             </Grid>
             <Grid item xs={12}>
